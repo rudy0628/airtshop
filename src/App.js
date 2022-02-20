@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import MainHeader from './components/layout/MainHeader';
+import IntroducePage from './pages/IntroducePage';
+import MyTicketPage from './pages/MyTicketPage';
+import SignInPage from './pages/SignInPage';
+import TicketsPage from './pages/TicketsPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Fragment>
+			<MainHeader />
+			<Routes>
+				<Route path="/" element={<IntroducePage />} />
+				<Route path="/MyTicket" element={<MyTicketPage />} />
+				<Route path="/SignIn" element={<SignInPage />} />
+				<Route path="/Tickets" element={<TicketsPage />} />
+			</Routes>
+		</Fragment>
+	);
 }
 
 export default App;

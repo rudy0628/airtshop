@@ -1,0 +1,73 @@
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 0 3.2rem;
+	background-color: #fff;
+	width: 100%;
+	height: 8rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+
+	&__logo {
+		&:link,
+		&:visited {
+			text-decoration: none;
+			font-size: 3rem;
+			font-family: 'Satisfy', cursive;
+			color: #f06595;
+		}
+
+		&:hover,
+		&:active {
+		}
+	}
+
+	&__nav {
+	}
+
+	&__list {
+		display: flex;
+		list-style: none;
+	}
+
+	&__item {
+		&:not(:last-child) {
+			margin-right: 1.6rem;
+		}
+	}
+
+	&__link {
+		&:link,
+		&:visited {
+			font-size: 2rem;
+			text-decoration: none;
+			font-weight: 700;
+			transition: all 0.3s;
+			color: #555;
+		}
+
+		&:hover,
+		&:active {
+			color: #f06595;
+		}
+
+		&--active {
+			&:link,
+			&:visited {
+				font-size: 2rem;
+				text-decoration: none;
+				font-weight: 700;
+				transition: all 0.3s;
+				color: #f06595;
+			}
+
+			&:hover,
+			&:active {
+				color: #f06595;
+			}
+		}
+	}
+}
