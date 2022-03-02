@@ -10,6 +10,7 @@
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+	z-index: 3;
 
 	&__logo {
 		&:link,
@@ -19,18 +20,12 @@
 			font-family: 'Satisfy', cursive;
 			color: #f06595;
 		}
-
-		&:hover,
-		&:active {
-		}
-	}
-
-	&__nav {
 	}
 
 	&__list {
 		display: flex;
 		list-style: none;
+		align-items: center;
 	}
 
 	&__item {
@@ -40,6 +35,15 @@
 	}
 
 	&__link {
+		font-size: 2rem;
+		text-decoration: none;
+		font-weight: 700;
+		transition: all 0.3s;
+		color: #555;
+		border: none;
+		background: none;
+		cursor: pointer;
+
 		&:link,
 		&:visited {
 			font-size: 2rem;

@@ -17,8 +17,8 @@
       10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
 --- 02 COLOR
       -Primary: #f06595
-      -Tints: 
-      -Shades: 
+      -Tints: #fcc2d7
+      -Shades: #d6336c
       -Accents:
 --- 03 SHADOWS
 --- 04 BORDER-RADIUS
@@ -78,6 +78,86 @@ body {
 	}
 }
 
+.subheading {
+	display: block;
+	font-weight: 500;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	margin-bottom: 1.6rem;
+	color: #d6336c;
+}
+
 .mt-large {
 	margin-top: 8rem;
+}
+
+// button
+.btn {
+	display: block;
+	padding: 1rem 2rem;
+	border-radius: 11px;
+	font-size: 2rem;
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	&--form {
+		border: 3px solid #d6336c;
+		background-color: #d6336c;
+		color: #fff;
+		transition: all 0.3s;
+		margin-left: auto;
+
+		&:hover {
+			background-color: #fff;
+			color: #d6336c;
+		}
+	}
+}
+
+// error text
+.error-text {
+	margin-bottom: 1.2rem;
+	font-size: 1.6rem;
+	text-align: center;
+	color: #f03e3e;
+}
+
+// centered
+.centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// line break
+.line-break {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 2.4rem;
+	font-size: 2rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #d6336c;
+
+	&::before,
+	&::after {
+		content: '';
+		flex: 1 1;
+		border-bottom: 2px solid #d6336c;
+		margin: auto;
+	}
+
+	&:before {
+		margin-right: 1rem;
+	}
+
+	&:after {
+		margin-left: 1rem;
+	}
+}
+
+// toast
+.toast {
+	font-size: 2rem;
 }

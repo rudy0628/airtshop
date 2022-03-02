@@ -1,0 +1,66 @@
+.footer {
+	background-color: #f06595;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 3.2rem;
+
+	&__logo {
+		&:link,
+		&:visited {
+			text-decoration: none;
+			font-size: 4.6rem;
+			font-family: 'Satisfy', cursive;
+			color: #fff;
+			margin-bottom: 2.4rem;
+		}
+	}
+
+	&__link {
+		&-box {
+			margin-bottom: 2.4rem;
+		}
+
+		&:link,
+		&:visited {
+			text-decoration: none;
+		}
+
+		&:not(:last-child) {
+			margin-right: 1.2rem;
+		}
+	}
+
+	&__icon {
+		&--facebook,
+		&--instagram,
+		&--twitter {
+			width: 4rem;
+			height: 4rem;
+			padding: 0.8rem;
+			color: #f06595;
+			background-color: #fff;
+			border-radius: 50%;
+			transition: all 0.3s;
+		}
+		&--facebook:hover {
+			color: #fff;
+			background-color: #1877f2;
+		}
+
+		&--instagram:hover {
+			color: #fff;
+			background-color: #fd1d1d;
+		}
+
+		&--twitter:hover {
+			color: #fff;
+			background-color: #1da1f2;
+		}
+	}
+
+	&__copyright {
+		font-size: 1.6rem;
+		color: #fff;
+	}
+}

@@ -1,0 +1,88 @@
+.signIn {
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: 3.2rem;
+
+	& form {
+		& h2 {
+			margin-bottom: 3.2rem;
+		}
+
+		& button {
+			margin-bottom: 2.4rem;
+		}
+	}
+
+	&__btn {
+		&--forgotPassword {
+			display: block;
+			margin: 1.6rem 0 1.6rem auto;
+			border: none;
+			background: none;
+			cursor: pointer;
+			font-size: 1.6rem;
+			color: #777;
+			font-weight: 700;
+			transition: all 0.3s;
+
+			&:hover {
+				color: #d6336c;
+			}
+		}
+	}
+
+	&__oauth {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 2.4rem;
+
+		& button {
+			height: 4rem;
+			width: 4rem;
+			border: 2px solid #555;
+			background: none;
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:not(:last-child) {
+				margin-right: 1.2rem;
+			}
+		}
+	}
+
+	&__icon {
+		height: 2.4rem;
+		width: 2.4rem;
+		color: #1877f2;
+	}
+
+	&__switchMode {
+		text-align: center;
+		font-size: 1.6rem;
+
+		& button {
+			background: none;
+			border: none;
+			color: #d6336c;
+			border-bottom: 2px solid #d6336c;
+			text-transform: uppercase;
+			font-size: 2rem;
+			font-weight: 700;
+			cursor: pointer;
+			margin: 0rem 1rem;
+		}
+	}
+
+	&__spinner {
+		width: 4rem;
+		height: 4rem;
+
+		& div {
+			width: 2.4rem;
+			height: 2.4rem;
+		}
+	}
+}

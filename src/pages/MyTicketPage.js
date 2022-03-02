@@ -1,5 +1,7 @@
+import TicketCart from '../components/tickets/TicketCart';
+
 const MyTicketPage = () => {
-	return <h1 className="mt-large">My Ticket Page</h1>;
+	return <TicketCart />;
 };
 
 export default MyTicketPage;

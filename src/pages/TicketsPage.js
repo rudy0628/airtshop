@@ -1,5 +1,7 @@
+import Tickets from '../components/tickets/Tickets';
+
 const TicketsPage = () => {
-	return <h1 className="mt-large">Tickets Page</h1>;
+	return <Tickets />;
 };
 
 export default TicketsPage;

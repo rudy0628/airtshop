@@ -1,0 +1,99 @@
+.ticket {
+	width: 80%;
+	margin: 0 auto;
+	display: grid;
+
+	&:not(:last-child) {
+		margin-bottom: 2.4rem;
+	}
+
+	&__header {
+		padding: 1rem 2rem;
+		background-color: #fcc2d7;
+		font-size: 2rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		border-top-left-radius: 11px;
+		border-top-right-radius: 11px;
+	}
+
+	&__main {
+		padding: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		row-gap: 2rem;
+	}
+
+	&__flight,
+	&__date,
+	&__from,
+	&__to,
+	&__boardingTime {
+		display: flex;
+		align-items: center;
+		font-size: 2.4rem;
+		font-weight: 700;
+		& span {
+			font-size: 1.6rem;
+			margin-right: 1.2rem;
+			font-weight: 400;
+		}
+	}
+
+	&__gate {
+		display: flex;
+		align-items: center;
+		font-size: 3.2rem;
+		font-weight: 700;
+		color: #d6336c;
+		& span {
+			font-size: 1.6rem;
+			margin-right: 1.2rem;
+			font-weight: 400;
+			color: #333;
+		}
+	}
+
+	&__footer {
+		padding: 1rem 2rem;
+		border-top: 2px solid #eee;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__select {
+		&-box {
+			display: flex;
+			align-items: center;
+			font-size: 1.6rem;
+
+			& span {
+				margin-right: 1rem;
+			}
+		}
+	}
+
+	&__btn {
+		&--order {
+			padding: 1rem 2rem;
+			border: 3px solid #f06595;
+			border-radius: 11px;
+			font-size: 1.6rem;
+			background-color: #f06595;
+			color: #fff;
+			cursor: pointer;
+			transition: all 0.3s;
+
+			&:hover {
+				background-color: #fff;
+				color: #f06595;
+			}
+		}
+	}
+
+	&__text {
+		font-size: 1.6rem;
+		color: #f06595;
+		margin: 0 auto;
+	}
+}

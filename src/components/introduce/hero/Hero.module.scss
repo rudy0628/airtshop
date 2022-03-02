@@ -1,7 +1,57 @@
 .section-hero {
+	background-image: linear-gradient(
+			rgba(255, 255, 255, 0.5),
+			rgba(255, 255, 255, 0.5)
+		),
+		url('../../../img/hero-bg.png');
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 85vh;
 	padding: 8rem 0 0rem;
 }
 
 .hero {
+	height: 100%;
 	width: 50%;
+
+	background-color: #f06595;
+
+	&__box--inner {
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+		clip-path: polygon(0% 20%, 100% 10%, 100% 80%, 0% 90%);
+		padding: 4rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__text {
+		font-size: 2rem;
+		font-weight: 400;
+		line-height: 1.5;
+		margin-bottom: 2.4rem;
+	}
+
+	&__img-box {
+		display: flex;
+		margin-bottom: 1.2rem;
+
+		& img {
+			display: inline-block;
+			width: 4.4rem;
+			height: 4.4rem;
+			border-radius: 50%;
+			margin-right: -1rem;
+			border: 4px solid #f06595;
+		}
+	}
+
+	&__subtext {
+		font-size: 1.4rem;
+		letter-spacing: 1.05px;
+		font-weight: 700;
+	}
 }

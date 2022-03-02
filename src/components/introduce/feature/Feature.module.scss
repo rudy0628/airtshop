@@ -1,0 +1,32 @@
+.section-feature {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url('../../../img/feature-bg.png');
+	background-position: center;
+	background-size: cover;
+	padding: 12.8rem 3.2rem;
+	display: flex;
+	justify-content: center;
+}
+
+.feature {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	&:not(:last-child) {
+		margin-right: 8rem;
+	}
+
+	&__icon {
+		width: 8rem;
+		height: 8rem;
+		color: #fff;
+		margin-bottom: 2rem;
+	}
+
+	&__text {
+		display: block;
+		font-size: 3.6rem;
+		color: #fff;
+		margin-bottom: 1rem;
+	}
+}

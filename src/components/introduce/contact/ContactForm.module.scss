@@ -1,0 +1,56 @@
+.form {
+	max-width: 120rem;
+	margin: 0 auto;
+	display: flex;
+	overflow: hidden;
+
+	& h2 {
+		margin-bottom: 3.2rem;
+		color: #f06595;
+	}
+
+	&__text {
+		font-size: 2rem;
+		margin-bottom: 3.2rem;
+	}
+
+	&__message {
+		& label {
+			display: block;
+			margin-bottom: 1.2rem;
+			font-size: 1.6rem;
+		}
+
+		& textarea {
+			width: 100%;
+			border: none;
+			border-radius: 11px;
+			box-shadow: 0 0 0 0.2rem rgb(214, 51, 108);
+			font-family: inherit;
+			font-size: 2rem;
+			padding: 1.2rem;
+			margin-bottom: 2.4rem;
+
+			&::placeholder {
+				color: #aaa;
+			}
+
+			&:focus {
+				outline: none;
+				box-shadow: 0 0 0 0.4rem rgb(214, 51, 108, 0.5);
+			}
+		}
+	}
+
+	& form {
+		width: 50%;
+		padding: 3.2rem;
+	}
+
+	&__img-box {
+		width: 50%;
+		background-image: url('../../../img/contact-bg.jpg');
+		background-position: center;
+		background-size: cover;
+	}
+}

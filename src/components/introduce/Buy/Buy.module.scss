@@ -1,0 +1,65 @@
+.section-buy {
+	display: flex;
+	height: 40rem;
+}
+
+@keyframes arrowRight {
+	0% {
+		margin-left: 0;
+	}
+
+	100% {
+		margin-left: 1rem;
+	}
+}
+
+.buy {
+	&__text-box {
+		padding: 4rem;
+		width: 50%;
+		background-color: #eee;
+
+		& h2 {
+			margin-bottom: 3.2rem;
+			color: #f06595;
+		}
+	}
+
+	&__text {
+		font-size: 2rem;
+		margin-bottom: 2.4rem;
+	}
+
+	&__link {
+		&:link,
+		&:visited {
+			font-size: 2rem;
+			text-decoration: none;
+			color: #f06595;
+		}
+
+		&:hover,
+		&:active {
+			span {
+				animation: arrowRight 0.8s infinite;
+			}
+		}
+	}
+
+	&__img-box {
+		background-image: linear-gradient(
+				rgb(250, 162, 193, 0.5),
+				rgb(250, 162, 193, 0.5)
+			),
+			url('../../../img/buy.jpg');
+		background-size: cover;
+		background-position: center;
+		width: 50%;
+
+		& img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}

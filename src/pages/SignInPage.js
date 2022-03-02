@@ -1,5 +1,7 @@
+import SignIn from '../components/signIn/SignIn';
+
 const SignInPage = () => {
-	return <h1 className="mt-large">Sign In Page</h1>;
+	return <SignIn />;
 };
 
 export default SignInPage;

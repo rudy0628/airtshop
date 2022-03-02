@@ -1,0 +1,27 @@
+.input {
+	& label {
+		font-size: 1.6rem;
+		display: block;
+		margin-bottom: 1.2rem;
+	}
+
+	& input {
+		width: 100%;
+		padding: 1.2rem;
+		font-size: 2rem;
+		font-family: inherit;
+		box-shadow: 0 0 0 0.2rem rgb(214, 51, 108);
+		border: none;
+		margin-bottom: 2.4rem;
+		border-radius: 11px;
+
+		&::placeholder {
+			color: #aaa;
+		}
+
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 0 0.4rem rgb(214, 51, 108, 0.5);
+		}
+	}
+}
