@@ -12,13 +12,28 @@ const Footer = () => {
 				airtshop
 			</NavLink>
 			<div className={classes['footer__link-box']}>
-				<a href="#" className={classes['footer__link']}>
+				<a
+					href="https://www.facebook.com/"
+					className={classes['footer__link']}
+					target="_blank"
+					rel="noreferrer"
+				>
 					<FiFacebook className={classes['footer__icon--facebook']} />
 				</a>
-				<a href="#" className={classes['footer__link']}>
+				<a
+					href="https://www.instagram.com/"
+					className={classes['footer__link']}
+					target="_blank"
+					rel="noreferrer"
+				>
 					<FiInstagram className={classes['footer__icon--instagram']} />
 				</a>
-				<a href="#" className={classes['footer__link']}>
+				<a
+					href="https://twitter.com/"
+					className={classes['footer__link']}
+					target="_blank"
+					rel="noreferrer"
+				>
 					<FiTwitter className={classes['footer__icon--twitter']} />
 				</a>
 			</div>

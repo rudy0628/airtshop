@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 
-import buyImg from '../../../img/buy.jpg';
 import classes from './Buy.module.scss';
 
 const Buy = () => {
