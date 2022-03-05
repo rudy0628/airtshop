@@ -38,7 +38,7 @@ const Footer = () => {
 				</a>
 			</div>
 			<p className={classes['footer__copyright']}>
-				{year} &copy; airtshop reserve all right
+				{year} &copy; airtshop reserved all right
 			</p>
 		</footer>
 	);

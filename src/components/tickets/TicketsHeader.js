@@ -28,6 +28,10 @@ const TicketsHeader = () => {
 				to: selectedTo.value,
 			})
 		);
+
+		setSelectedFrom(null);
+		setSelectedTo(null);
+		dateTimeRef.current.value = '';
 	};
 
 	const resetHandler = () => {
@@ -53,7 +57,7 @@ const TicketsHeader = () => {
 						options={airportCode}
 						onChange={setSelectedFrom}
 						className={classes['tickets__select']}
-						style={{ width: '500px' }}
+						value={selectedFrom}
 					/>
 				</div>
 				<div className={classes['tickets__input']}>
@@ -62,6 +66,7 @@ const TicketsHeader = () => {
 						options={airportCode}
 						onChange={setSelectedTo}
 						className={classes['tickets__select']}
+						value={selectedTo}
 					/>
 				</div>
 				<button className={classes['tickets__btn--search']}>

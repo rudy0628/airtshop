@@ -1,3 +1,4 @@
+import ScrollAnimation from 'react-animate-on-scroll';
 import classes from './StepItem.module.scss';
 
 const StepItem = props => {
@@ -11,7 +12,9 @@ const StepItem = props => {
 	return (
 		<div className={style}>
 			<div className={classes['step__img-box']}>
-				<img src={props.image} alt={props.title} />
+				<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" animateOnce>
+					<img src={props.image} alt={props.title} />
+				</ScrollAnimation>
 			</div>
 			<div className={classes['step__text-box']}>
 				<p className={classes['step__number']}>{props.number}</p>
