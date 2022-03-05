@@ -49,7 +49,7 @@ const ContactForm = () => {
 
 	return (
 		<Card className={classes.form}>
-			<form onSubmit={submitHandler} name="contact" method="post">
+			<form name="contact" method="post">
 				<h2 className="heading__secondary">Have Any Question?</h2>
 				<p className={classes['form__text']}>Please send the message below</p>
 				<Input
