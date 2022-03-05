@@ -11,41 +11,23 @@ const ContactForm = () => {
 	const {
 		value: nameValue,
 		hasError: nameHasError,
-		isValid: nameIsValid,
 		valueChangeHandler: nameChangeHandler,
 		inputBlurHandler: nameBlurHandler,
-		reset: nameReset,
 	} = useInput(isNotEmpty);
 
 	const {
 		value: emailValue,
 		hasError: emailHasError,
-		isValid: emailIsValid,
 		valueChangeHandler: emailChangeHandler,
 		inputBlurHandler: emailBlurHandler,
-		reset: emailReset,
 	} = useInput(isEmail);
 
 	const {
 		value: messageValue,
 		hasError: messageHasError,
-		isValid: messageIsValid,
 		valueChangeHandler: messageChangeHandler,
 		inputBlurHandler: messageBlurHandler,
-		reset: messageReset,
 	} = useInput(isNotEmpty);
-
-	const fromIsValid = nameIsValid && emailIsValid && messageIsValid;
-
-	const submitHandler = e => {
-		e.preventDefault();
-
-		if (!fromIsValid) return;
-
-		nameReset();
-		emailReset();
-		messageReset();
-	};
 
 	return (
 		<Card className={classes.form}>
