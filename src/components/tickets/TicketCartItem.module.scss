@@ -2,6 +2,7 @@
 	max-width: 80rem;
 	margin: 0 auto 2.4rem;
 	overflow: hidden;
+	position: relative;
 
 	&__header {
 		padding: 1rem 2rem;
@@ -29,19 +30,36 @@
 		align-items: center;
 		font-size: 2.4rem;
 		font-weight: 700;
+
+		@media only screen and (max-width: 25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
 		& span {
 			font-size: 1.6rem;
 			margin-right: 1.2rem;
 			font-weight: 400;
+
+			@media only screen and (max-width: 25em) {
+				margin-bottom: 1.2rem;
+			}
 		}
 	}
 
-	&__gate {
+	&__gate,
+	&__seat {
 		display: flex;
 		align-items: center;
 		font-size: 3.2rem;
 		font-weight: 700;
 		color: #d6336c;
+
+		@media only screen and (max-width: 25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
 		& span {
 			font-size: 1.6rem;
 			margin-right: 1.2rem;
@@ -72,6 +90,40 @@
 			&:hover {
 				background-color: #fff;
 				color: #f06595;
+			}
+		}
+	}
+
+	&__overtime {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 2;
+		background-color: rgba(0, 0, 0, 0.7);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&--text {
+			font-size: 2.4rem;
+			margin-bottom: 2.4rem;
+			color: #fff;
+		}
+
+		&--btn {
+			padding: 1rem 2rem;
+			border: 3px solid #d6336c;
+			border-radius: 11px;
+			background-color: #d6336c;
+			color: #fff;
+			cursor: pointer;
+			transition: all 0.3s;
+
+			&:hover {
+				background-color: transparent;
 			}
 		}
 	}

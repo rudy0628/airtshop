@@ -62,6 +62,7 @@
 	&__switchMode {
 		text-align: center;
 		font-size: 1.6rem;
+		line-height: 1.5;
 
 		& button {
 			background: none;
@@ -73,6 +74,10 @@
 			font-weight: 700;
 			cursor: pointer;
 			margin: 0rem 1rem;
+
+			@media only screen and (max-width: 25em) {
+				font-size: 1.6rem;
+			}
 		}
 	}
 

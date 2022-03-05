@@ -16,8 +16,22 @@ const TicketItem = props => {
 	const name = useSelector(state => state.auth.username);
 	const dispatch = useDispatch();
 
+	// create sort seats option
 	const seatOptions = [];
-	const sortSeats = [...props.seats].sort((a, b) => a - b);
+	const sortSeats = [...props.seats].sort((a, b) => {
+		const stringACode = Number(a.slice(0, -1));
+		const stringBCode = Number(b.slice(0, -1));
+
+		if (stringACode < stringBCode) {
+			return -1;
+		}
+
+		if (stringACode > stringBCode) {
+			return 1;
+		}
+
+		return 0;
+	});
 	for (const seat of sortSeats) {
 		seatOptions.push({ value: seat, label: seat });
 	}
@@ -47,8 +61,10 @@ const TicketItem = props => {
 			gate: props.gate,
 		};
 
+		// take current seats and filter with selected value
 		const filterSeats = props.seats.filter(seat => seat !== selectedSeat.value);
 
+		// updated cart, updated current ticket seats
 		dispatch(ticketsActions.addTicketCart(ticketCartData));
 		dispatch(
 			ticketsActions.updateTickets({
@@ -57,6 +73,9 @@ const TicketItem = props => {
 				type: 'BUY',
 			})
 		);
+
+		setSelectedClass(null);
+		setSelectedSeat(null);
 	};
 
 	return (
@@ -94,13 +113,23 @@ const TicketItem = props => {
 				{isLogged && (
 					<div className={classes['ticket__select-box']}>
 						<span>class</span>
-						<Select onChange={setSelectedClass} options={classOptions} />
+						<Select
+							value={selectedClass}
+							onChange={setSelectedClass}
+							options={classOptions}
+							className={classes['ticket__select']}
+						/>
 					</div>
 				)}
 				{isLogged && (
 					<div className={classes['ticket__select-box']}>
 						<span>seat</span>
-						<Select onChange={setSelectedSeat} options={seatOptions} />
+						<Select
+							value={selectedSeat}
+							onChange={setSelectedSeat}
+							options={seatOptions}
+							className={classes['ticket__select']}
+						/>
 					</div>
 				)}
 				{isLogged && (

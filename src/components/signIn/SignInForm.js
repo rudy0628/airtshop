@@ -194,7 +194,9 @@ const SignInForm = () => {
 								}}
 							/>
 						)}
-						<button className="btn btn--form">{formBtnText}</button>
+						<button className="btn btn--form" disabled={!formIsValid}>
+							{formBtnText}
+						</button>
 					</form>
 					{formType !== 'FIND' && (
 						<button

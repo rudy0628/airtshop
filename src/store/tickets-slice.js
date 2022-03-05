@@ -90,12 +90,7 @@ export const fetchTicketsData = () => {
 
 		const currentTickets = [];
 		for (const key in data) {
-			// if time is after current time, then push into array
-			if (
-				Date.parse(`${data[key].date} ${data[key].boardingTime}`) > Date.now()
-			) {
-				currentTickets.push({ ...data[key], id: key });
-			}
+			currentTickets.push({ ...data[key], id: key });
 		}
 
 		dispatch(ticketsActions.replaceTickets(currentTickets));
@@ -103,7 +98,9 @@ export const fetchTicketsData = () => {
 };
 
 export const sendTicketsData = () => {
-	return async () => {
+	return async dispatch => {
+		dispatch(ticketsActions.setIsLoading(true));
+
 		const ticketsContent = productionTicketsContent();
 		// clear the tickets content
 		await fetch('https://airtshop-default-rtdb.firebaseio.com/tickets.json', {
@@ -138,11 +135,15 @@ export const sendTicketsData = () => {
 				},
 			});
 		}
+
+		dispatch(ticketsActions.setIsLoading(false));
 	};
 };
 
 export const updateTicketsData = ticketsContent => {
-	return async () => {
+	return async dispatch => {
+		dispatch(ticketsActions.setIsLoading(true));
+
 		for (const ticket of ticketsContent) {
 			await fetch(
 				`https://airtshop-default-rtdb.firebaseio.com/tickets/${ticket.id}.json`,
@@ -164,6 +165,8 @@ export const updateTicketsData = ticketsContent => {
 				}
 			);
 		}
+
+		dispatch(ticketsActions.setIsLoading(false));
 	};
 };
 

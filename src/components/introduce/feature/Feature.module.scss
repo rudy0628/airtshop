@@ -6,14 +6,31 @@
 	padding: 12.8rem 3.2rem;
 	display: flex;
 	justify-content: center;
+
+	@media only screen and (max-width: 53.125em) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-row-gap: 2.4rem;
+	}
+
+	@media only screen and (max-width: 28.125em) {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row-gap: 2.4rem;
+	}
 }
 
 .feature {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
 	&:not(:last-child) {
 		margin-right: 8rem;
+
+		@media only screen and (max-width: 53.125em) {
+			margin-right: 0rem;
+		}
 	}
 
 	&__icon {

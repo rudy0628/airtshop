@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth-slice';
-import { sendTicketCartData, getTicketCartData } from './store/tickets-slice';
+import { getTicketCartData } from './store/tickets-slice';
 import { ToastContainer } from 'react-toastify';
 
 import MainHeader from './components/layout/MainHeader';
@@ -17,7 +17,6 @@ function App() {
 
 	// react-redux variables
 	const isLogged = useSelector(state => state.auth.isLogged);
-	const ticketCart = useSelector(state => state.tickets.ticketCart);
 
 	// local storage variables
 	const userId = localStorage.getItem('userId');
@@ -25,7 +24,7 @@ function App() {
 	const username = localStorage.getItem('username');
 
 	///////////////////////////////////////////////////////////////
-	/* put this two useEffect hook here cause when the user is login, the app will re-evaluate again, and we can check the react redux variable */
+	/* put this useEffect hook here cause when the user is login, the "App.js" will re-evaluate again, and we can check the react redux variable */
 	///////////////////////////////////////////////////////////////
 
 	useEffect(() => {
@@ -42,13 +41,6 @@ function App() {
 			dispatch(getTicketCartData(userId));
 		}
 	}, [userId, expirationTime, username, dispatch]);
-
-	useEffect(() => {
-		// when userId is exist(user is logged) and ticket cart is change(add or delete)
-		if (userId) {
-			dispatch(sendTicketCartData(ticketCart, userId));
-		}
-	}, [ticketCart, dispatch, userId]);
 
 	return (
 		<Fragment>

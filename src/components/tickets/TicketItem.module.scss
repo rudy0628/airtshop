@@ -1,5 +1,5 @@
 .ticket {
-	width: 80%;
+	max-width: 80%;
 	margin: 0 auto;
 	display: grid;
 
@@ -33,10 +33,21 @@
 		align-items: center;
 		font-size: 2.4rem;
 		font-weight: 700;
+
+		@media only screen and (max-width: 31.25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
 		& span {
 			font-size: 1.6rem;
 			margin-right: 1.2rem;
 			font-weight: 400;
+
+			@media only screen and (max-width: 31.25em) {
+				margin-right: 0rem;
+				margin-bottom: 1.2rem;
+			}
 		}
 	}
 
@@ -46,11 +57,22 @@
 		font-size: 3.2rem;
 		font-weight: 700;
 		color: #d6336c;
+
+		@media only screen and (max-width: 31.25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
 		& span {
 			font-size: 1.6rem;
 			margin-right: 1.2rem;
 			font-weight: 400;
 			color: #333;
+
+			@media only screen and (max-width: 31.25em) {
+				margin-right: 0rem;
+				margin-bottom: 1.2rem;
+			}
 		}
 	}
 
@@ -59,9 +81,15 @@
 		border-top: 2px solid #eee;
 		display: flex;
 		justify-content: space-between;
+
+		@media only screen and (max-width: 37.5em) {
+			flex-direction: column;
+			gap: 2.4rem;
+		}
 	}
 
 	&__select {
+		width: 100%;
 		&-box {
 			display: flex;
 			align-items: center;

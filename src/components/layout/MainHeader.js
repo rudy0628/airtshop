@@ -1,21 +1,37 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { NavLink, useNavigate } from 'react-router-dom';
+
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import 'react-toastify/dist/ReactToastify.css';
 import classes from './MainHeader.module.scss';
 
 const MainHeader = () => {
+	const [menuIsOpen, setMenuIsOpen] = useState(false);
 	const isLogged = useSelector(state => state.auth.isLogged);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const logoutHandler = () => {
 		dispatch(authActions.logout());
+		setMenuIsOpen(prevState => !prevState);
 		navigate('/');
 	};
 
+	const toggleMenuHandler = () => {
+		setMenuIsOpen(prevState => !prevState);
+	};
+
+	let headerClasses;
+	if (menuIsOpen) {
+		headerClasses = `${classes.header} ${classes['nav-open']}`;
+	} else {
+		headerClasses = `${classes.header}`;
+	}
+
 	return (
-		<header className={classes.header}>
+		<header className={headerClasses}>
 			<NavLink to="/" className={classes['header__logo']}>
 				airtshop
 			</NavLink>
@@ -29,6 +45,7 @@ const MainHeader = () => {
 									? `${classes['header__link--active']}`
 									: `${classes['header__link']}`
 							}
+							onClick={toggleMenuHandler}
 						>
 							Tickets
 						</NavLink>
@@ -42,6 +59,7 @@ const MainHeader = () => {
 										? `${classes['header__link--active']}`
 										: `${classes['header__link']}`
 								}
+								onClick={toggleMenuHandler}
 							>
 								My Ticket
 							</NavLink>
@@ -56,6 +74,7 @@ const MainHeader = () => {
 										? `${classes['header__link--active']}`
 										: `${classes['header__link']}`
 								}
+								onClick={toggleMenuHandler}
 							>
 								Sign In
 							</NavLink>
@@ -71,6 +90,17 @@ const MainHeader = () => {
 					</li>
 				</ul>
 			</nav>
+			<button
+				onClick={toggleMenuHandler}
+				className={classes['header__link--menu']}
+			>
+				{!menuIsOpen && (
+					<AiOutlineMenu className={classes['header__icon--menu']} />
+				)}
+				{menuIsOpen && (
+					<AiOutlineClose className={classes['header__icon--close']} />
+				)}
+			</button>
 		</header>
 	);
 };

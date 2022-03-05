@@ -2,18 +2,22 @@
 	background-color: #d6336c;
 	width: 100%;
 	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0 3.2rem;
+	padding: 12.8rem 3.2rem 9.6rem;
 }
 
 .tickets {
-	max-width: 120rem;
+	max-width: 80rem;
 	background-color: #fff;
+	margin: 0 auto;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+
+	@media only screen and (max-width: 53.125em) {
+		max-width: 100rem;
+	}
 
 	&__box {
-		height: 70vh;
 		overflow-y: scroll;
 		padding: 2.4rem 0;
 
@@ -22,7 +26,7 @@
 		}
 
 		&::-webkit-scrollbar-track {
-			background: #f1f1f1;
+			background: #fff;
 			border-radius: 150px;
 		}
 

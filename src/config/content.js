@@ -1,4 +1,6 @@
-import fakeImg from '../img/steps/fake-step.png';
+import signInPage from '../img/steps/sign-in-page.PNG';
+import ticketsPage from '../img/steps/tickets-page.PNG';
+import myTicketPage from '../img/steps/my-ticket-page.PNG';
 import { AiOutlineUser, AiOutlineFieldTime } from 'react-icons/ai';
 import { RiRouteFill } from 'react-icons/ri';
 import { IoTicketOutline } from 'react-icons/io5';
@@ -10,7 +12,7 @@ export const steps = [
 		title: 'Login Account',
 		description:
 			'Click the top right login button to register or login, our web app support google and facebook account connect.',
-		image: fakeImg,
+		image: signInPage,
 		flow: 'NORMAL',
 	},
 	{
@@ -19,7 +21,7 @@ export const steps = [
 		title: 'Select Your Ticket',
 		description:
 			'Select your ticket in Tickets page, you can choose take off time and destination.',
-		image: fakeImg,
+		image: ticketsPage,
 		flow: 'REV',
 	},
 	{
@@ -28,7 +30,7 @@ export const steps = [
 		title: 'Check you Ticket',
 		description:
 			'You can see your ticket in My Ticket page, inside this page, our app will show what ticket you order, and you can delete your ticket just in one step.',
-		image: fakeImg,
+		image: myTicketPage,
 		flow: 'NORMAL',
 	},
 ];

@@ -53,6 +53,7 @@ const TicketsHeader = () => {
 						options={airportCode}
 						onChange={setSelectedFrom}
 						className={classes['tickets__select']}
+						style={{ width: '500px' }}
 					/>
 				</div>
 				<div className={classes['tickets__input']}>

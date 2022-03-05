@@ -1,11 +1,20 @@
 .tickets {
 	&__nav {
-		height: 6rem;
+		height: 7rem;
 		border-bottom: 2px solid #ddd;
+
+		@media only screen and (max-width: 43.75em) {
+			height: auto;
+		}
 
 		& form {
 			height: 100%;
 			display: flex;
+			justify-content: flex-end;
+
+			@media only screen and (max-width: 43.75em) {
+				flex-direction: column;
+			}
 		}
 	}
 
@@ -14,6 +23,12 @@
 		height: 100%;
 		border-right: 2px solid #ddd;
 		display: flex;
+
+		@media only screen and (max-width: 43.75em) {
+			border-right: none;
+			border-bottom: 2px solid #ddd;
+			padding: 1.6rem 1.6rem;
+		}
 
 		& label {
 			margin-right: 1.2rem;
@@ -33,13 +48,13 @@
 			font-size: 1.6rem;
 			font-family: inherit;
 
+			@media only screen and (max-width: 43.75em) {
+				width: 100%;
+			}
+
 			&:focus {
 				outline: none;
 			}
-		}
-
-		& option {
-			padding: 1rem;
 		}
 	}
 
@@ -50,9 +65,17 @@
 		align-items: center;
 		font-size: 1.6rem;
 		border-color: #d6336c;
+		width: 100%;
+
+		@media only screen and (max-width: 43.75em) {
+			display: block;
+		}
 	}
 
 	&__btn {
+		&--box {
+		}
+
 		&--reset,
 		&--search {
 			padding: 1.2rem;
@@ -61,6 +84,7 @@
 			color: #d6336c;
 			cursor: pointer;
 			transition: all 0.3s;
+			// height: 100%;
 
 			&:hover {
 				background-color: #d6336c;
@@ -70,6 +94,11 @@
 
 		&--search {
 			border-right: 2px solid #ddd;
+
+			@media only screen and (max-width: 43.75em) {
+				border-right: none;
+				border-bottom: 2px solid #ddd;
+			}
 		}
 	}
 

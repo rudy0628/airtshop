@@ -40,6 +40,14 @@
 html {
 	font-size: 62.5%;
 	overflow-x: hidden;
+
+	@media only screen and (max-width: 68.75em) {
+		font-size: 56.25%;
+	}
+
+	@media only screen and (max-width: 59.375em) {
+		font-size: 50%;
+	}
 }
 
 body {
@@ -87,10 +95,6 @@ body {
 	color: #d6336c;
 }
 
-.mt-large {
-	margin-top: 8rem;
-}
-
 // button
 .btn {
 	display: block;
@@ -111,6 +115,17 @@ body {
 		&:hover {
 			background-color: #fff;
 			color: #d6336c;
+		}
+
+		&:disabled {
+			background-color: #ccc;
+			border: 3px solid #ccc;
+
+			&:hover {
+				background-color: #ccc;
+				color: #fff;
+				cursor: not-allowed;
+			}
 		}
 	}
 }
@@ -160,4 +175,10 @@ body {
 // toast
 .toast {
 	font-size: 2rem;
+}
+
+// empty text
+.empty-text {
+	text-align: center;
+	font-size: 3.2rem;
 }

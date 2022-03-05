@@ -9,12 +9,14 @@ const TicketCartItem = props => {
 	const dispatch = useDispatch();
 
 	const removeFromTicketCart = async () => {
+		// remove the ticket from ticket cart, this action will trigger useEffect function in TicketCart component
 		dispatch(ticketsActions.removeTicketCart(ticket.id));
 
+		const id = ticket.id.replace(`${ticket.seat}`, '');
 		dispatch(
 			ticketsActions.updateTickets({
-				id: ticket.id.slice(0, -2),
-				seat: ticket.id.slice(-2),
+				id: id,
+				seat: ticket.seat,
 				type: 'CANCEL',
 			})
 		);
@@ -58,7 +60,7 @@ const TicketCartItem = props => {
 					<span>Gate</span>
 					{ticket.gate}
 				</p>
-				<p className={classes['ticketCart__gate']}>
+				<p className={classes['ticketCart__seat']}>
 					<span>Seat</span>
 					{ticket.seat}
 				</p>
@@ -71,6 +73,19 @@ const TicketCartItem = props => {
 					Cancel
 				</button>
 			</footer>
+			{Date.now() > Date.parse(`${ticket.date} ${ticket.boardingTime}`) && (
+				<div className={classes['ticketCart__overtime']}>
+					<p className={classes['ticketCart__overtime--text']}>
+						This ticket is overtime!
+					</p>
+					<button
+						onClick={removeFromTicketCart}
+						className={classes['ticketCart__overtime--btn']}
+					>
+						Cancel
+					</button>
+				</div>
+			)}
 		</Card>
 	);
 };
