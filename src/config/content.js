@@ -1,6 +1,6 @@
-import signInPage from '../img/steps/sign-in-page.PNG';
-import ticketsPage from '../img/steps/tickets-page.PNG';
-import myTicketPage from '../img/steps/my-ticket-page.PNG';
+import signInPage from '../img/steps/sign-in-page.webp';
+import ticketsPage from '../img/steps/tickets-page.webp';
+import myTicketPage from '../img/steps/my-ticket-page.webp';
 import { AiOutlineUser, AiOutlineFieldTime } from 'react-icons/ai';
 import { RiRouteFill } from 'react-icons/ri';
 import { IoTicketOutline } from 'react-icons/io5';

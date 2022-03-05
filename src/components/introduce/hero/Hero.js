@@ -1,11 +1,11 @@
 import classes from './Hero.module.scss';
 import ScrollAnimation from 'react-animate-on-scroll';
-import user1 from '../../../img/user/user-1.jpg';
-import user2 from '../../../img/user/user-2.jpg';
-import user3 from '../../../img/user/user-3.jpg';
-import user4 from '../../../img/user/user-4.jpg';
-import user5 from '../../../img/user/user-5.jpg';
-import user6 from '../../../img/user/user-6.jpg';
+import user1 from '../../../img/user/user-1.webp';
+import user2 from '../../../img/user/user-2.webp';
+import user3 from '../../../img/user/user-3.webp';
+import user4 from '../../../img/user/user-4.webp';
+import user5 from '../../../img/user/user-5.webp';
+import user6 from '../../../img/user/user-6.webp';
 
 const Hero = () => {
 	return (

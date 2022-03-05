@@ -36,6 +36,8 @@
 			transform: translateX(100%);
 			opacity: 0;
 			transition: all 0.3s;
+			backdrop-filter: blur(5px);
+			-webkit-backdrop-filter: blur(5px);
 		}
 	}
 

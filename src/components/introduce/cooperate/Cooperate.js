@@ -1,9 +1,9 @@
 import classes from './Cooperate.module.scss';
-import company1 from '../../../img/cop/company-1.png';
-import company2 from '../../../img/cop/company-2.png';
-import company3 from '../../../img/cop/company-3.png';
-import company4 from '../../../img/cop/company-4.png';
-import company5 from '../../../img/cop/company-5.png';
+import company1 from '../../../img/cop/company-1.webp';
+import company2 from '../../../img/cop/company-2.webp';
+import company3 from '../../../img/cop/company-3.webp';
+import company4 from '../../../img/cop/company-4.webp';
+import company5 from '../../../img/cop/company-5.webp';
 
 const Cooperate = () => {
 	return (
