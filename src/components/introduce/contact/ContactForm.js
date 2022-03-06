@@ -34,6 +34,7 @@ const ContactForm = () => {
 			<form name="contact" method="post">
 				<h2 className="heading__secondary">Have Any Question?</h2>
 				<p className={classes['form__text']}>Please send the message below</p>
+				<input type="hidden" name="form-name" value="contact" />
 				<Input
 					title="Name"
 					type="text"
