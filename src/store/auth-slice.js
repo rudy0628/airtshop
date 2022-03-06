@@ -75,14 +75,11 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 	return async dispatch => {
 		let url;
 		if (formType === 'SIGNIN') {
-			url =
-				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM';
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.API_KEY}`;
 		} else if (formType === 'REGISTER') {
-			url =
-				'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM';
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.API_KEY}`;
 		} else if (formType === 'FIND') {
-			url =
-				'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM';
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.API_KEY}`;
 		}
 
 		let sendBodyData;
