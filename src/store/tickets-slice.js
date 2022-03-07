@@ -138,7 +138,6 @@ export const sendTicketsData = () => {
 export const updateTicketsData = ticketsContent => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
-		console.log('updated tickets data');
 
 		for (const ticket of ticketsContent) {
 			await fetch(`${process.env.REACT_APP_URL}/tickets/${ticket.id}.json`, {
@@ -168,7 +167,6 @@ export const sendTicketCartData = (ticketCart, id) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
-		console.log('send tickets cart data');
 		await fetch(`${process.env.REACT_APP_URL}/user/${id}/ticketCart.json`, {
 			method: 'PUT',
 			body: JSON.stringify(ticketCart),
