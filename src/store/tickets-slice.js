@@ -138,6 +138,7 @@ export const sendTicketsData = () => {
 export const updateTicketsData = ticketsContent => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
+		console.log('updated tickets data');
 
 		for (const ticket of ticketsContent) {
 			await fetch(`${process.env.REACT_APP_URL}/tickets/${ticket.id}.json`, {
@@ -164,7 +165,10 @@ export const updateTicketsData = ticketsContent => {
 
 // update user ticket cart in firebase
 export const sendTicketCartData = (ticketCart, id) => {
-	return async () => {
+	return async dispatch => {
+		dispatch(ticketsActions.setIsLoading(true));
+
+		console.log('send tickets cart data');
 		await fetch(`${process.env.REACT_APP_URL}/user/${id}/ticketCart.json`, {
 			method: 'PUT',
 			body: JSON.stringify(ticketCart),
@@ -172,14 +176,18 @@ export const sendTicketCartData = (ticketCart, id) => {
 				'Content-Type': 'application/json',
 			},
 		});
+
+		dispatch(ticketsActions.setIsLoading(false));
 	};
 };
 
 export const getTicketCartData = id => {
 	return async dispatch => {
+		dispatch(ticketsActions.setIsLoading(true));
 		const response = await fetch(
 			`${process.env.REACT_APP_URL}/user/${id}/ticketCart.json`
 		);
+		dispatch(ticketsActions.setIsLoading(true));
 
 		const data = await response.json();
 
