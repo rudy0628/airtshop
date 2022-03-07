@@ -1,4 +1,4 @@
-import { Fragment, useEffect, React } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth-slice';
