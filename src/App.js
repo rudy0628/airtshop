@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, React } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth-slice';
@@ -6,11 +6,12 @@ import { getTicketCartData } from './store/tickets-slice';
 import { ToastContainer } from 'react-toastify';
 
 import MainHeader from './components/layout/MainHeader';
-import IntroducePage from './pages/IntroducePage';
-import MyTicketPage from './pages/MyTicketPage';
-import SignInPage from './pages/SignInPage';
-import TicketsPage from './pages/TicketsPage';
 import 'react-toastify/dist/ReactToastify.css';
+// lazy loading
+const IntroducePage = React.lazy(() => import('./pages/IntroducePage'));
+const MyTicketPage = React.lazy(() => import('./pages/MyTicketPage'));
+const SignInPage = React.lazy(() => import('./pages/SignInPage'));
+const TicketsPage = React.lazy(() => import('./pages/TicketsPage'));
 
 function App() {
 	const dispatch = useDispatch();
