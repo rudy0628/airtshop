@@ -82,9 +82,7 @@ const ticketsSlice = createSlice({
 export const fetchTicketsData = () => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
-		const response = await fetch(
-			'https://airtshop-default-rtdb.firebaseio.com/tickets.json'
-		);
+		const response = await fetch(`${process.env.REACT_APP_URL}/tickets.json`);
 		const data = await response.json();
 		dispatch(ticketsActions.setIsLoading(false));
 
@@ -103,7 +101,7 @@ export const sendTicketsData = () => {
 
 		const ticketsContent = productionTicketsContent();
 		// clear the tickets content
-		await fetch('https://airtshop-default-rtdb.firebaseio.com/tickets.json', {
+		await fetch(`${process.env.REACT_APP_URL}/tickets.json`, {
 			method: 'PUT',
 			body: JSON.stringify([]),
 			headers: {
@@ -114,20 +112,17 @@ export const sendTicketsData = () => {
 		// set the new Time Limited
 		let nextDay = new Date();
 		nextDay.setHours(24, 0, 0, 0);
-		await fetch(
-			'https://airtshop-default-rtdb.firebaseio.com/currentDate.json',
-			{
-				method: 'PUT',
-				body: JSON.stringify(Date.parse(nextDay)),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		);
+		await fetch(`${process.env.REACT_APP_URL}/currentDate.json`, {
+			method: 'PUT',
+			body: JSON.stringify(Date.parse(nextDay)),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
 		// send the new tickets data to firebase realtime database
 		for (const ticket of ticketsContent) {
-			await fetch('https://airtshop-default-rtdb.firebaseio.com/tickets.json', {
+			await fetch(`${process.env.REACT_APP_URL}/tickets.json`, {
 				method: 'POST',
 				body: JSON.stringify(ticket),
 				headers: {
@@ -145,25 +140,22 @@ export const updateTicketsData = ticketsContent => {
 		dispatch(ticketsActions.setIsLoading(true));
 
 		for (const ticket of ticketsContent) {
-			await fetch(
-				`https://airtshop-default-rtdb.firebaseio.com/tickets/${ticket.id}.json`,
-				{
-					method: 'PATCH',
-					body: JSON.stringify({
-						airline: ticket.airline,
-						boardingTime: ticket.boardingTime,
-						date: ticket.date,
-						flight: ticket.flight,
-						from: ticket.from,
-						to: ticket.to,
-						gate: ticket.gate,
-						seats: ticket.seats,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
+			await fetch(`${process.env.REACT_APP_URL}/tickets/${ticket.id}.json`, {
+				method: 'PATCH',
+				body: JSON.stringify({
+					airline: ticket.airline,
+					boardingTime: ticket.boardingTime,
+					date: ticket.date,
+					flight: ticket.flight,
+					from: ticket.from,
+					to: ticket.to,
+					gate: ticket.gate,
+					seats: ticket.seats,
+				}),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 		}
 
 		dispatch(ticketsActions.setIsLoading(false));
@@ -173,23 +165,20 @@ export const updateTicketsData = ticketsContent => {
 // update user ticket cart in firebase
 export const sendTicketCartData = (ticketCart, id) => {
 	return async () => {
-		await fetch(
-			`https://airtshop-default-rtdb.firebaseio.com/user/${id}/ticketCart.json`,
-			{
-				method: 'PUT',
-				body: JSON.stringify(ticketCart),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		);
+		await fetch(`${process.env.REACT_APP_URL}/user/${id}/ticketCart.json`, {
+			method: 'PUT',
+			body: JSON.stringify(ticketCart),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 	};
 };
 
 export const getTicketCartData = id => {
 	return async dispatch => {
 		const response = await fetch(
-			`https://airtshop-default-rtdb.firebaseio.com/user/${id}/ticketCart.json`
+			`${process.env.REACT_APP_URL}/user/${id}/ticketCart.json`
 		);
 
 		const data = await response.json();
