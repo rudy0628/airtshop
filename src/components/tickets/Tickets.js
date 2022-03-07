@@ -43,26 +43,26 @@ const Tickets = () => {
 					)}
 					{!isLoading &&
 						ticketsContent.length !== 0 &&
-						ticketsContent.map(ticket => {
-							if (
-								Date.parse(`${ticket.date} ${ticket.boardingTime}`) > Date.now()
-							) {
-								return (
-									<TicketItem
-										key={ticket.id}
-										id={ticket.id}
-										seats={ticket.seats}
-										airline={ticket.airline}
-										flight={ticket.flight}
-										date={ticket.date}
-										from={ticket.from}
-										to={ticket.to}
-										boardingTime={ticket.boardingTime}
-										gate={ticket.gate}
-									/>
-								);
-							}
-						})}
+						ticketsContent
+							.filter(
+								ticket =>
+									Date.parse(`${ticket.date} ${ticket.boardingTime}`) >
+									Date.now()
+							)
+							.map(ticket => (
+								<TicketItem
+									key={ticket.id}
+									id={ticket.id}
+									seats={ticket.seats}
+									airline={ticket.airline}
+									flight={ticket.flight}
+									date={ticket.date}
+									from={ticket.from}
+									to={ticket.to}
+									boardingTime={ticket.boardingTime}
+									gate={ticket.gate}
+								/>
+							))}
 					{!isLoading && ticketsContent.length === 0 && (
 						<p className="empty-text">No airline tickets!</p>
 					)}
