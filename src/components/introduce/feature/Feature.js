@@ -15,8 +15,9 @@ const Feature = () => {
 						delay={delay}
 						className={classes.feature}
 						animateOnce
+						key={feature.id}
 					>
-						<div className={classes.feature} key={feature.id}>
+						<div className={classes.feature}>
 							<feature.icon className={classes['feature__icon']} />
 							<span className={classes['feature__text']}>{feature.amount}</span>
 							<span className={classes['feature__text']}>{feature.title}</span>

@@ -10,6 +10,7 @@ import Contact from '../components/introduce/contact/Contact';
 import Footer from '../components/introduce/footer/Footer';
 
 const IntroducePage = () => {
+	console.log(process.env.API_KEY);
 	return (
 		<Fragment>
 			<Helmet>
