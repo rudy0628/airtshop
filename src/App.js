@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, Suspense, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth-slice';
 import { getTicketCartData } from './store/tickets-slice';
 import { ToastContainer } from 'react-toastify';
 
+import Spinner from './components/UI/spinner/Spinner';
 import MainHeader from './components/layout/MainHeader';
 import 'react-toastify/dist/ReactToastify.css';
 // lazy loading
@@ -45,20 +46,28 @@ function App() {
 
 	return (
 		<Fragment>
-			<ToastContainer className="toast" />
-			<MainHeader />
-			<Routes>
-				<Route path="/" element={<IntroducePage />} />
-				<Route path="/tickets" element={<TicketsPage />} />
-				<Route
-					path="/my-ticket"
-					element={isLogged ? <MyTicketPage /> : <Navigate to="/sign-in" />}
-				/>
-				<Route
-					path="/sign-in"
-					element={isLogged ? <Navigate to="/" /> : <SignInPage />}
-				/>
-			</Routes>
+			<Suspense
+				fallback={
+					<div className="centered">
+						<Spinner />
+					</div>
+				}
+			>
+				<ToastContainer className="toast" />
+				<MainHeader />
+				<Routes>
+					<Route path="/" element={<IntroducePage />} />
+					<Route path="/tickets" element={<TicketsPage />} />
+					<Route
+						path="/my-ticket"
+						element={isLogged ? <MyTicketPage /> : <Navigate to="/sign-in" />}
+					/>
+					<Route
+						path="/sign-in"
+						element={isLogged ? <Navigate to="/" /> : <SignInPage />}
+					/>
+				</Routes>
+			</Suspense>
 		</Fragment>
 	);
 }
