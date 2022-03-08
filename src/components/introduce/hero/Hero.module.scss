@@ -31,6 +31,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+
+		@media only screen and (max-width: 25em) {
+			clip-path: polygon(0% 15%, 100% 5%, 100% 85%, 0% 95%);
+		}
 	}
 
 	&__text {
