@@ -13,7 +13,6 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	height: 30vh;
 	width: 40vw;
 	background-color: #fff;
 	z-index: 5;
@@ -22,7 +21,7 @@
 	flex-direction: column;
 
 	&__header {
-		padding: 1rem 2rem;
+		padding: 1.6rem 2rem;
 		background-color: #d6336c;
 		& h2 {
 			font-size: 3.2rem;
@@ -31,12 +30,63 @@
 	}
 
 	&__main {
-		padding: 3.2rem 2rem;
+		padding: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		row-gap: 2rem;
+	}
 
-		& p {
-			font-size: 2rem;
-			display: flex;
-			align-items: center;
+	&__flight,
+	&__date,
+	&__from,
+	&__to,
+	&__boardingTime,
+	&__class {
+		display: flex;
+		align-items: center;
+		font-size: 2.4rem;
+		font-weight: 700;
+
+		@media only screen and (max-width: 31.25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		& span {
+			font-size: 1.6rem;
+			margin-right: 1.2rem;
+			font-weight: 400;
+
+			@media only screen and (max-width: 31.25em) {
+				margin-right: 0rem;
+				margin-bottom: 1.2rem;
+			}
+		}
+	}
+
+	&__gate,
+	&__seat {
+		display: flex;
+		align-items: center;
+		font-size: 3.2rem;
+		font-weight: 700;
+		color: #d6336c;
+
+		@media only screen and (max-width: 31.25em) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		& span {
+			font-size: 1.6rem;
+			margin-right: 1.2rem;
+			font-weight: 400;
+			color: #333;
+
+			@media only screen and (max-width: 31.25em) {
+				margin-right: 0rem;
+				margin-bottom: 1.2rem;
+			}
 		}
 	}
 
@@ -44,12 +94,30 @@
 		border-top: 2px solid #ddd;
 		margin-top: auto;
 		padding: 1rem 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
 	}
 
 	&__btn {
-		display: block;
-		margin-left: auto;
 		padding: 1rem 2rem;
+		border: 3px solid #d6336c;
+		border-radius: 11px;
+		background-color: #d6336c;
+		color: #fff;
+		font-size: 2rem;
+		cursor: pointer;
+		box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3);
+		transition: all 0.3s;
+
+		&:not(:last-child) {
+			margin-right: 1.2rem;
+		}
+
+		&:hover {
+			background-color: #fff;
+			color: #d6336c;
+		}
 	}
 
 	&__icon {

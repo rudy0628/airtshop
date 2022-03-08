@@ -1,36 +1,91 @@
-import classes from './Modal.module.scss';
-import Card from '../card/Card';
 import { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { BsCheck2Circle } from 'react-icons/bs';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import useInput from '../../../hooks/use-input';
+
+import Input from '../input/Input';
+import Card from '../card/Card';
+import classes from './Modal.module.scss';
+
+const isNotEmpty = value => value.trim().length > 0;
 
 const Backdrop = props => {
 	return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
 const ModalOverlay = props => {
-	let icons;
-	if (props.title === 'Success') {
-		icons = <BsCheck2Circle className={classes['modal__icon--success']} />;
-	} else if (props.title === 'Error') {
-		icons = <AiOutlineCloseCircle className={classes['modal__icon--error']} />;
-	}
+	const { ticket } = props;
+
+	const {
+		value: nameValue,
+		hasError: nameHasError,
+		isValid: nameIsValid,
+		inputBlurHandler: nameBlurHandler,
+		valueChangeHandler: nameChangeHandler,
+		reset: nameReset,
+	} = useInput(isNotEmpty);
+
+	const submitHandler = () => {
+		if (!nameIsValid) return;
+		props.onAddToCart(nameValue);
+		nameReset();
+	};
 
 	return (
 		<Card className={classes.modal}>
 			<header className={classes['modal__header']}>
-				<h2>{props.title}</h2>
+				<h2>Check you ticket</h2>
 			</header>
 			<main className={classes['modal__main']}>
-				<p>
-					{icons}
-					{props.message}
+				<p className={classes['modal__flight']}>
+					<span>Flight</span>
+					{ticket.flight}
 				</p>
+				<p className={classes['modal__date']}>
+					<span>Date</span>
+					{ticket.date}
+				</p>
+				<p className={classes['modal__from']}>
+					<span>From</span>
+					{ticket.from}
+				</p>
+				<p className={classes['modal__to']}>
+					<span>To</span>
+					{ticket.to}
+				</p>
+				<p className={classes['modal__boardingTime']}>
+					<span>Boarding Time</span>
+					{ticket.boardingTime}
+				</p>
+				<p className={classes['modal__class']}>
+					<span>Class</span>
+					{ticket.class}
+				</p>
+				<p className={classes['modal__seat']}>
+					<span>Seat</span>
+					{ticket.seat}
+				</p>
+				<p className={classes['modal__gate']}>
+					<span>Gate</span>
+					{ticket.gate}
+				</p>
+				<Input
+					title="Name"
+					id="name"
+					type="text"
+					name="name"
+					placeholder="Your FullName"
+					value={nameValue}
+					onChange={nameChangeHandler}
+					onBlur={nameBlurHandler}
+					error={{ hasError: nameHasError, errorMessage: 'InValid name' }}
+				/>
 			</main>
 			<footer className={classes['modal__footer']}>
-				<button className="btn btn--form" onClick={props.onClose}>
-					OK
+				<button className={classes['modal__btn']} onClick={props.onClose}>
+					Cancel
+				</button>
+				<button className={classes['modal__btn']} onClick={submitHandler}>
+					Order
 				</button>
 			</footer>
 		</Card>
@@ -46,9 +101,9 @@ const Modal = props => {
 			)}
 			{ReactDOM.createPortal(
 				<ModalOverlay
-					title={props.title}
-					message={props.message}
+					ticket={props.ticket}
 					onClose={props.onClose}
+					onAddToCart={props.onAddToCart}
 				/>,
 				document.querySelector('#overlay-root')
 			)}
