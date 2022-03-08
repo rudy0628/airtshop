@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ticketsActions } from '../../store/tickets-slice';
+import QRCode from 'qrcode.react';
 
 import Card from '../UI/card/Card';
 import classes from './TicketCartItem.module.scss';
@@ -64,6 +65,9 @@ const TicketCartItem = props => {
 					<span>Seat</span>
 					{ticket.seat}
 				</p>
+				<QRCode
+					value={`${ticket.flight} ${ticket.seat} ${ticket.name} boarding success!`}
+				/>
 			</main>
 			<footer className={classes['ticketCart__footer']}>
 				<button

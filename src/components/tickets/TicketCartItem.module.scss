@@ -65,6 +65,10 @@
 			margin-right: 1.2rem;
 			font-weight: 400;
 			color: #333;
+
+			@media only screen and (max-width: 25em) {
+				margin-bottom: 1.2rem;
+			}
 		}
 	}
 
@@ -80,12 +84,13 @@
 			padding: 1rem 2rem;
 			border: 3px solid #f06595;
 			border-radius: 11px;
-			font-size: 1.6rem;
+			font-size: 2rem;
 			background-color: #f06595;
 			color: #fff;
 			cursor: pointer;
 			transition: all 0.3s;
 			margin-left: auto;
+			box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
 
 			&:hover {
 				background-color: #fff;

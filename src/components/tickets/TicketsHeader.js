@@ -58,6 +58,7 @@ const TicketsHeader = () => {
 						onChange={setSelectedFrom}
 						className={classes['tickets__select']}
 						value={selectedFrom}
+						isSearchable={false}
 					/>
 				</div>
 				<div className={classes['tickets__input']}>
@@ -67,6 +68,7 @@ const TicketsHeader = () => {
 						onChange={setSelectedTo}
 						className={classes['tickets__select']}
 						value={selectedTo}
+						isSearchable={false}
 					/>
 				</div>
 				<button className={classes['tickets__btn--search']}>

@@ -5,11 +5,11 @@ import { authActions } from './store/auth-slice';
 import { getTicketCartData } from './store/tickets-slice';
 import { ToastContainer } from 'react-toastify';
 
+import IntroducePage from './pages/IntroducePage';
 import Spinner from './components/UI/spinner/Spinner';
 import MainHeader from './components/layout/MainHeader';
 import 'react-toastify/dist/ReactToastify.css';
 // lazy loading
-const IntroducePage = React.lazy(() => import('./pages/IntroducePage'));
 const MyTicketPage = React.lazy(() => import('./pages/MyTicketPage'));
 const SignInPage = React.lazy(() => import('./pages/SignInPage'));
 const TicketsPage = React.lazy(() => import('./pages/TicketsPage'));

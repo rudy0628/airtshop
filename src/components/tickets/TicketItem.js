@@ -118,6 +118,7 @@ const TicketItem = props => {
 							onChange={setSelectedClass}
 							options={classOptions}
 							className={classes['ticket__select']}
+							isSearchable={false}
 						/>
 					</div>
 				)}
@@ -129,6 +130,7 @@ const TicketItem = props => {
 							onChange={setSelectedSeat}
 							options={seatOptions}
 							className={classes['ticket__select']}
+							isSearchable={false}
 						/>
 					</div>
 				)}
