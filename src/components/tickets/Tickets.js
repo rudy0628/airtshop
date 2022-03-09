@@ -31,6 +31,25 @@ const Tickets = () => {
 		dispatch(fetchTicketsData());
 	}, [dispatch]);
 
+	const filterTicket = ticketsContent
+		.filter(
+			ticket => Date.parse(`${ticket.date} ${ticket.boardingTime}`) > Date.now()
+		)
+		.map(ticket => (
+			<TicketItem
+				key={ticket.id}
+				id={ticket.id}
+				seats={ticket.seats}
+				airline={ticket.airline}
+				flight={ticket.flight}
+				date={ticket.date}
+				from={ticket.from}
+				to={ticket.to}
+				boardingTime={ticket.boardingTime}
+				gate={ticket.gate}
+			/>
+		));
+
 	return (
 		<section className={classes['section-tickets']}>
 			<Card className={classes.tickets}>
@@ -41,29 +60,8 @@ const Tickets = () => {
 							<Spinner />
 						</div>
 					)}
-					{!isLoading &&
-						ticketsContent.length !== 0 &&
-						ticketsContent
-							.filter(
-								ticket =>
-									Date.parse(`${ticket.date} ${ticket.boardingTime}`) >
-									Date.now()
-							)
-							.map(ticket => (
-								<TicketItem
-									key={ticket.id}
-									id={ticket.id}
-									seats={ticket.seats}
-									airline={ticket.airline}
-									flight={ticket.flight}
-									date={ticket.date}
-									from={ticket.from}
-									to={ticket.to}
-									boardingTime={ticket.boardingTime}
-									gate={ticket.gate}
-								/>
-							))}
-					{!isLoading && ticketsContent.length === 0 && (
+					{!isLoading && filterTicket.length !== 0 && filterTicket}
+					{!isLoading && filterTicket.length === 0 && (
 						<p className="empty-text">No airline tickets!</p>
 					)}
 				</div>
