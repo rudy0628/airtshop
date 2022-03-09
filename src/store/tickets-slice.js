@@ -24,6 +24,8 @@ const ticketsSlice = createSlice({
 				ticket => ticket.id === action.payload.id
 			);
 
+			if (!ticket) return;
+
 			if (action.payload.type === 'BUY') {
 				ticket.seats = action.payload.seats;
 			}

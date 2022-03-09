@@ -37,6 +37,7 @@ const TicketItem = props => {
 		seatOptions.push({ value: seat, label: seat });
 	}
 
+	//////////////////////modal//////////////////////
 	const openCheckModalHandler = () => {
 		if (!selectedClass) {
 			toast.error('Please select class!', toastStyle);
@@ -54,6 +55,7 @@ const TicketItem = props => {
 	const closeModalHandler = () => {
 		setModalIsOpen(false);
 	};
+	/////////////////////////////////////////////////
 
 	// real send to firebase action
 	const addToCartHandler = name => {
