@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTicketsData, sendTicketsData } from '../../store/tickets-slice';
+import { fetchTicketsData } from '../../store/tickets-slice';
+import { v4 as uuidv4 } from 'uuid';
 
 import TicketsHeader from './TicketsHeader';
 import TicketItem from './TicketItem';
@@ -15,40 +16,24 @@ const Tickets = () => {
 
 	// if app is first load, check if date is overtime, if it's, updated the tickets to firebase
 	useEffect(() => {
-		// fetch time limited
-		const fetchTimeLimited = async () => {
-			const response = await fetch(
-				'https://airtshop-default-rtdb.firebaseio.com/currentDate.json'
-			);
-			const data = await response.json();
-
-			if (Date.now() > data) {
-				dispatch(sendTicketsData());
-			}
-		};
-		fetchTimeLimited();
-
 		dispatch(fetchTicketsData());
 	}, [dispatch]);
 
-	const filterTicket = ticketsContent
-		.filter(
-			ticket => Date.parse(`${ticket.date} ${ticket.boardingTime}`) > Date.now()
-		)
-		.map(ticket => (
+	const filterTicket = ticketsContent.map(ticket => {
+		const id = uuidv4();
+		return (
 			<TicketItem
-				key={ticket.id}
-				id={ticket.id}
-				seats={ticket.seats}
-				airline={ticket.airline}
-				flight={ticket.flight}
-				date={ticket.date}
-				from={ticket.from}
-				to={ticket.to}
-				boardingTime={ticket.boardingTime}
-				gate={ticket.gate}
+				key={id}
+				id={id}
+				flight={ticket.flight_iata}
+				depTime={ticket.dep_time_ts}
+				arrTime={ticket.arr_time_ts}
+				from={ticket.dep_iata}
+				to={ticket.arr_iata}
+				gate={ticket.dep_gate}
 			/>
-		));
+		);
+	});
 
 	return (
 		<section className={classes['section-tickets']}>

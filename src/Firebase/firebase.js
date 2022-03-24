@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: process.env.REACT_APP_API_KEY,
+	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 	authDomain: 'airtshop.firebaseapp.com',
 	databaseURL: 'https://airtshop-default-rtdb.firebaseio.com',
 	projectId: 'airtshop',

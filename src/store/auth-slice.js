@@ -5,8 +5,7 @@ import { toastStyle } from '../config/content';
 let logoutTimer;
 
 const authInitialState = {
-	userId: '',
-	username: '',
+	token: '',
 	isLogged: false,
 	isLogging: false,
 };
@@ -26,44 +25,27 @@ const authSlice = createSlice({
 	reducers: {
 		login(state, action) {
 			state.isLogged = true;
-			state.userId = action.payload.userId;
-			state.username = action.payload.username;
+			state.token = action.payload.token;
 
 			const remainingTime = calculateRemainingTime(
 				action.payload.expirationTime
 			);
 
-			localStorage.setItem('userId', action.payload.userId);
-			localStorage.setItem('username', action.payload.username);
+			localStorage.setItem('token', action.payload.token);
 			localStorage.setItem('expirationTime', action.payload.expirationTime);
 
 			logoutTimer = setTimeout(authActions.logout, remainingTime);
-
-			toast.success(`Welcome, ${action.payload.username}!`, toastStyle);
 		},
 		logout(state) {
 			state.isLogged = false;
-			state.userId = '';
-			state.username = '';
+			state.token = '';
 
-			localStorage.removeItem('userId');
-			localStorage.removeItem('username');
+			localStorage.removeItem('token');
 			localStorage.removeItem('expirationTime');
 
 			if (logoutTimer) {
 				clearTimeout(logoutTimer);
 			}
-
-			toast.success('GoodBye!', toastStyle);
-		},
-		replaceAuthContent(state, action) {
-			state.isLogged = true;
-			state.userId = action.payload.userId;
-			state.username = action.payload.username;
-			const remainingTime = calculateRemainingTime(
-				action.payload.expirationTime
-			);
-			logoutTimer = setTimeout(authActions.logout, remainingTime);
 		},
 		setIsLogging(state, action) {
 			state.isLogging = action.payload;
@@ -75,11 +57,11 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 	return async dispatch => {
 		let url;
 		if (formType === 'SIGNIN') {
-			url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`;
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
 		} else if (formType === 'REGISTER') {
-			url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`;
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
 		} else if (formType === 'FIND') {
-			url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_API_KEY}`;
+			url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
 		}
 
 		let sendBodyData;
@@ -131,9 +113,8 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 
 				dispatch(
 					authActions.login({
+						token: data.idToken,
 						expirationTime: expirationTime.toISOString(),
-						userId: data.localId,
-						username: data.displayName,
 					})
 				);
 			} else {

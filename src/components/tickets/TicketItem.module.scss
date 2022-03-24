@@ -25,10 +25,10 @@
 	}
 
 	&__flight,
-	&__date,
+	&__arrTime,
+	&__depTime,
 	&__from,
-	&__to,
-	&__boardingTime {
+	&__to {
 		display: flex;
 		align-items: center;
 		font-size: 2.4rem;
@@ -85,19 +85,6 @@
 		@media only screen and (max-width: 37.5em) {
 			flex-direction: column;
 			gap: 2.4rem;
-		}
-	}
-
-	&__select {
-		width: 100%;
-		&-box {
-			display: flex;
-			align-items: center;
-			font-size: 1.6rem;
-
-			& span {
-				margin-right: 1rem;
-			}
 		}
 	}
 

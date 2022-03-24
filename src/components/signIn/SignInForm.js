@@ -56,36 +56,40 @@ const SignInForm = () => {
 		reset: nameReset,
 	} = useInput(isNotEmpty);
 
+	// google login
 	const signInWithGoogle = () => {
 		const provider = new GoogleAuthProvider();
 		signInWithPopup(auth, provider)
 			.then(result => {
 				dispatch(
 					authActions.login({
-						userId: result.user.uid,
-						username: result.user.displayName,
+						token: result._tokenResponse.idToken,
 						expirationTime: result.user.stsTokenManager.expirationTime,
 					})
 				);
 				navigate('/');
+
+				toast.success(`Welcome, ${result.user.displayName}!`, toastStyle);
 			})
 			.catch(error => {
 				toast.error('Google Login Failed, Please Try Again!', toastStyle);
 			});
 	};
 
+	// facebook login
 	const signInWithFacebook = () => {
 		const provider = new FacebookAuthProvider();
 		signInWithPopup(auth, provider)
 			.then(result => {
 				dispatch(
 					authActions.login({
-						userId: result.user.uid,
-						username: result.user.displayName,
+						token: result._tokenResponse.idToken,
 						expirationTime: result.user.stsTokenManager.expirationTime,
 					})
 				);
 				navigate('/');
+
+				toast.success(`Welcome, ${result.user.displayName}!`, toastStyle);
 			})
 			.catch(e => {
 				toast.error('Facebook Login Failed, Please Try Again!', toastStyle);
@@ -130,6 +134,10 @@ const SignInForm = () => {
 		dispatch(sendUserData(emailValue, passwordValue, nameValue, formType));
 
 		reset();
+
+		if (formType !== 'FIND') {
+			toast.success(`Welcome, ${nameValue}!`, toastStyle);
+		}
 	};
 
 	let title, formBtnText;

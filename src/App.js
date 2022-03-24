@@ -2,13 +2,13 @@ import React, { Fragment, Suspense, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth-slice';
-import { getTicketCartData } from './store/tickets-slice';
 import { ToastContainer } from 'react-toastify';
 
 import IntroducePage from './pages/IntroducePage';
 import Spinner from './components/UI/spinner/Spinner';
 import MainHeader from './components/layout/MainHeader';
 import 'react-toastify/dist/ReactToastify.css';
+
 // lazy loading
 const MyTicketPage = React.lazy(() => import('./pages/MyTicketPage'));
 const SignInPage = React.lazy(() => import('./pages/SignInPage'));
@@ -21,28 +21,24 @@ function App() {
 	const isLogged = useSelector(state => state.auth.isLogged);
 
 	// local storage variables
-	const userId = localStorage.getItem('userId');
+	const token = localStorage.getItem('token');
 	const expirationTime = localStorage.getItem('expirationTime');
-	const username = localStorage.getItem('username');
 
 	///////////////////////////////////////////////////////////////
 	/* put this useEffect hook here cause when the user is login, the "App.js" will re-evaluate again, and we can check the react redux variable */
 	///////////////////////////////////////////////////////////////
 
 	useEffect(() => {
-		// when the userId is exist(user is logged), replace redux auth content and also get current user cart data
-		if (userId) {
+		// when the userId is exist(user is logged), replace redux auth content
+		if (token) {
 			dispatch(
-				authActions.replaceAuthContent({
+				authActions.login({
 					expirationTime: expirationTime,
-					userId: userId,
-					username: username,
+					token: token,
 				})
 			);
-
-			dispatch(getTicketCartData(userId));
 		}
-	}, [userId, expirationTime, username, dispatch]);
+	}, [token, expirationTime, dispatch]);
 
 	return (
 		<Fragment>

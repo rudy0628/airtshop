@@ -1,6 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { ticketsActions } from '../../store/tickets-slice';
-import QRCode from 'qrcode.react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTicketCartData } from '../../store/tickets-slice';
 
 import Card from '../UI/card/Card';
 import classes from './TicketCartItem.module.scss';
@@ -8,42 +7,47 @@ import classes from './TicketCartItem.module.scss';
 const TicketCartItem = props => {
 	const { ticket } = props;
 	const dispatch = useDispatch();
+	const token = useSelector(state => state.auth.token);
+	const formatDepTime = `${new Date(ticket.depTime * 1000).toLocaleDateString(
+		'zh-Tw'
+	)} ${new Date(ticket.depTime * 1000).toLocaleTimeString('zh-Tw')}`;
+	const formatArrTime = `${new Date(ticket.arrTime * 1000).toLocaleDateString(
+		'zh-Tw'
+	)} ${new Date(ticket.arrTime * 1000).toLocaleTimeString('zh-Tw')}`;
 
 	const removeFromTicketCart = async () => {
-		// remove the ticket from ticket cart, this action will trigger useEffect function in TicketCart component
-		dispatch(ticketsActions.removeTicketCart(ticket.id));
-
-		const id = ticket.id.replace(`${ticket.seat}`, '');
-		dispatch(
-			ticketsActions.updateTickets({
-				id: id,
-				seat: ticket.seat,
-				type: 'CANCEL',
-			})
-		);
+		dispatch(deleteTicketCartData(ticket._id, token));
 	};
 
 	return (
-		<Card key={ticket.id} className={classes['ticketCart']}>
+		<Card className={classes['ticketCart']}>
 			<header className={classes['ticketCart__header']}>
-				<p className={classes['ticketCart__airline']}>{ticket.airline}</p>
+				<p className={classes['ticketCart__airline']}>SS Airline</p>
 			</header>
 			<main className={classes['ticketCart__main']}>
 				<p className={classes['ticketCart__name']}>
 					<span>Name</span>
-					{ticket.name}
+					Rudy
 				</p>
 				<p className={classes['ticketCart__class']}>
 					<span>Class</span>
-					{ticket.class}
+					Business
 				</p>
 				<p className={classes['ticketCart__flight']}>
 					<span>Flight</span>
 					{ticket.flight}
 				</p>
-				<p className={classes['ticketCart__date']}>
-					<span>Date</span>
-					{ticket.date}
+				<p className={classes['ticketCart__gate']}>
+					<span>Gate</span>
+					{ticket.gate}
+				</p>
+				<p className={classes['ticketCart__depTime']}>
+					<span>Dep Time</span>
+					{formatDepTime}
+				</p>
+				<p className={classes['ticketCart__arrTime']}>
+					<span>Arr Time</span>
+					{formatArrTime}
 				</p>
 				<p className={classes['ticketCart__from']}>
 					<span>From</span>
@@ -53,21 +57,10 @@ const TicketCartItem = props => {
 					<span>To</span>
 					{ticket.to}
 				</p>
-				<p className={classes['ticketCart__boardingTime']}>
-					<span>Boarding Time</span>
-					{ticket.boardingTime}
-				</p>
-				<p className={classes['ticketCart__gate']}>
-					<span>Gate</span>
-					{ticket.gate}
-				</p>
 				<p className={classes['ticketCart__seat']}>
 					<span>Seat</span>
-					{ticket.seat}
+					12A
 				</p>
-				<QRCode
-					value={`${ticket.flight} ${ticket.seat} ${ticket.name} boarding success!`}
-				/>
 			</main>
 			<footer className={classes['ticketCart__footer']}>
 				<button
@@ -77,7 +70,7 @@ const TicketCartItem = props => {
 					Cancel
 				</button>
 			</footer>
-			{Date.now() > Date.parse(`${ticket.date} ${ticket.boardingTime}`) && (
+			{Date.now() > ticket.depTime * 1000 && (
 				<div className={classes['ticketCart__overtime']}>
 					<p className={classes['ticketCart__overtime--text']}>
 						This ticket is overtime!

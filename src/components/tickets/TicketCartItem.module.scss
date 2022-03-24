@@ -22,10 +22,10 @@
 	&__class,
 	&__name,
 	&__flight,
-	&__date,
+	&__depTime,
+	&__arrTime,
 	&__from,
-	&__to,
-	&__boardingTime {
+	&__to {
 		display: flex;
 		align-items: center;
 		font-size: 2.4rem;

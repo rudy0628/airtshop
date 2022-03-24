@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toastStyle } from '../../config/content';
+import { toast } from 'react-toastify';
 
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,6 +19,7 @@ const MainHeader = () => {
 		dispatch(authActions.logout());
 		setMenuIsOpen(prevState => !prevState);
 		navigate('/');
+		toast.success('GoodBye!', toastStyle);
 	};
 
 	const toggleMenuHandler = () => {
