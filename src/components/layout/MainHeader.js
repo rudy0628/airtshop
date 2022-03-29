@@ -42,6 +42,19 @@ const MainHeader = () => {
 				<ul className={classes['header__list']}>
 					<li className={classes['header__item']}>
 						<NavLink
+							to="/flight-map"
+							className={({ isActive }) =>
+								isActive
+									? `${classes['header__link--active']}`
+									: `${classes['header__link']}`
+							}
+							onClick={toggleMenuHandler}
+						>
+							Map
+						</NavLink>
+					</li>
+					<li className={classes['header__item']}>
+						<NavLink
 							to="/tickets"
 							className={({ isActive }) =>
 								isActive
@@ -65,6 +78,21 @@ const MainHeader = () => {
 								onClick={toggleMenuHandler}
 							>
 								My Ticket
+							</NavLink>
+						</li>
+					)}
+					{isLogged && (
+						<li className={classes['header__item']}>
+							<NavLink
+								to="/profile"
+								className={({ isActive }) =>
+									isActive
+										? `${classes['header__link--active']}`
+										: `${classes['header__link']}`
+								}
+								onClick={toggleMenuHandler}
+							>
+								Profile
 							</NavLink>
 						</li>
 					)}

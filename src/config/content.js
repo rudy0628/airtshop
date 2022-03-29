@@ -62,307 +62,6 @@ export const features = [
 	},
 ];
 
-export const airportCode = [
-	{
-		value: 'ATL',
-		label: 'ATL',
-	},
-	{
-		value: 'PEK',
-		label: 'PEK',
-	},
-	{
-		value: 'LAX',
-		label: 'LAX',
-	},
-	{
-		value: 'DXB',
-		label: 'DXB',
-	},
-	{
-		value: 'HND',
-		label: 'HND',
-	},
-	{
-		value: 'ORD',
-		label: 'ORD',
-	},
-	{
-		value: 'LHR',
-		label: 'LHR',
-	},
-	{
-		value: 'PVG',
-		label: 'PVG',
-	},
-	{
-		value: 'CDG',
-		label: 'CDG',
-	},
-	{
-		value: 'DFW',
-		label: 'DFW',
-	},
-	{
-		value: 'CAN',
-		label: 'CAN',
-	},
-	{
-		value: 'AMS',
-		label: 'AMS',
-	},
-	{
-		value: 'HKG',
-		label: 'HKG',
-	},
-	{
-		value: 'ICN',
-		label: 'ICN',
-	},
-	{
-		value: 'FRA',
-		label: 'FRA',
-	},
-	{
-		value: 'DEN',
-		label: 'DEN',
-	},
-	{
-		value: 'DEL',
-		label: 'DEL',
-	},
-	{
-		value: 'SIN',
-		label: 'SIN',
-	},
-	{
-		value: 'BKK',
-		label: 'BKK',
-	},
-	{
-		value: 'JFK',
-		label: 'JFK',
-	},
-	{
-		value: 'KUL',
-		label: 'KUL',
-	},
-	{
-		value: 'MAD',
-		label: 'MAD',
-	},
-	{
-		value: 'SFO',
-		label: 'SFO',
-	},
-	{
-		value: 'CTU',
-		label: 'CTU',
-	},
-	{
-		value: 'CGK',
-		label: 'CGK',
-	},
-	{
-		value: 'SZX',
-		label: 'SZX',
-	},
-	{
-		value: 'IST',
-		label: 'IST',
-	},
-	{
-		value: 'SEA',
-		label: 'SEA',
-	},
-	{
-		value: 'LAS',
-		label: 'LAS',
-	},
-	{
-		value: 'MCO',
-		label: 'MCO',
-	},
-	{
-		value: 'YYZ',
-		label: 'YYZ',
-	},
-	{
-		value: 'MEX',
-		label: 'MEX',
-	},
-	{
-		value: 'CLT',
-		label: 'CLT',
-	},
-	{
-		value: 'BCN',
-		label: 'BCN',
-	},
-	{
-		value: 'SVO',
-		label: 'SVO',
-	},
-	{
-		value: 'TPE',
-		label: 'TPE',
-	},
-	{
-		value: 'KMG',
-		label: 'KMG',
-	},
-	{
-		value: 'MUC',
-		label: 'MUC',
-	},
-	{
-		value: 'MNL',
-		label: 'MNL',
-	},
-	{
-		value: 'XIY',
-		label: 'XIY',
-	},
-	{
-		value: 'LGW',
-		label: 'LGW',
-	},
-	{
-		value: 'BCN',
-		label: 'BCN',
-	},
-	{
-		value: 'EWR',
-		label: 'EWR',
-	},
-	{
-		value: 'PHX',
-		label: 'PHX',
-	},
-	{
-		value: 'MIA',
-		label: 'MIA',
-	},
-	{
-		value: 'SHA',
-		label: 'SHA',
-	},
-	{
-		value: 'IAH',
-		label: 'IAH',
-	},
-	{
-		value: 'CKG',
-		label: 'CKG',
-	},
-	{
-		value: 'SYD',
-		label: 'SYD',
-	},
-	{
-		value: 'NRT',
-		label: 'NRT',
-	},
-];
-
-export const classOptions = [
-	{
-		value: 'Economy',
-		label: 'Economy',
-	},
-	{
-		value: 'Business',
-		label: 'Business',
-	},
-	{
-		value: 'First',
-		label: 'First',
-	},
-];
-
-export const productionTicketsContent = () => {
-	const seats = [];
-	for (let i = 1; i <= 10; i++) {
-		for (let j = 0; j < 5; j++) {
-			let charStartCode = 65;
-			seats.push(`${i}${String.fromCharCode(charStartCode + j)}`);
-		}
-	}
-
-	return [
-		{
-			airline: 'ssairline',
-			flight: 'WA005',
-			from: 'EWR',
-			to: 'NRT',
-			date: new Intl.DateTimeFormat('en-US', {
-				month: '2-digit',
-				day: '2-digit',
-				year: 'numeric',
-			}).format(new Date()),
-			boardingTime: '15:10',
-			gate: 'G',
-			seats: seats,
-		},
-		{
-			airline: 'ssairline',
-			flight: 'WA006',
-			from: 'TPE',
-			to: 'PHX',
-			date: new Intl.DateTimeFormat('en-US', {
-				month: '2-digit',
-				day: '2-digit',
-				year: 'numeric',
-			}).format(new Date()),
-			boardingTime: '16:10',
-			gate: 'A',
-			seats: seats,
-		},
-		{
-			airline: 'ssairline',
-			flight: 'WA007',
-			from: 'MIA',
-			to: 'IAH',
-			date: new Intl.DateTimeFormat('en-US', {
-				month: '2-digit',
-				day: '2-digit',
-				year: 'numeric',
-			}).format(new Date()),
-			boardingTime: '17:10',
-			gate: 'B',
-			seats: seats,
-		},
-		{
-			airline: 'ssairline',
-			flight: 'WA008',
-			from: 'LAS',
-			to: 'MCO',
-			date: new Intl.DateTimeFormat('en-US', {
-				month: '2-digit',
-				day: '2-digit',
-				year: 'numeric',
-			}).format(new Date()),
-			boardingTime: '18:10',
-			gate: 'C',
-			seats: seats,
-		},
-		{
-			airline: 'ssairline',
-			flight: 'WA009',
-			from: 'JFK',
-			to: 'KUL',
-			date: new Intl.DateTimeFormat('en-US', {
-				month: '2-digit',
-				day: '2-digit',
-				year: 'numeric',
-			}).format(new Date()),
-			boardingTime: '19:10',
-			gate: 'D',
-			seats: seats,
-		},
-	];
-};
-
 export const toastStyle = {
 	position: 'top-center',
 	autoClose: 5000,
@@ -371,4 +70,38 @@ export const toastStyle = {
 	pauseOnHover: true,
 	draggable: true,
 	progress: undefined,
+};
+
+export const passengersOption = [
+	{
+		value: 'child',
+		text: 'Child (0 ~ 12)',
+	},
+	{
+		value: 'adult',
+		text: 'Adult (12 up)',
+	},
+];
+
+export const classOption = [
+	{
+		value: 'economy',
+		text: 'Economy',
+	},
+	{
+		value: 'business',
+		text: 'Business',
+	},
+	{
+		value: 'first',
+		text: 'First',
+	},
+];
+
+export const generateSeat = () => {
+	const seatRow = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+	const seatCol = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+	const rowRandom = Math.floor(Math.random() * 10);
+	const colRandom = Math.floor(Math.random() * 7);
+	return `${seatRow[rowRandom]}${seatCol[colRandom]}`;
 };

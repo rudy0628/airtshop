@@ -2,21 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { toastStyle } from '../config/content';
 
-let logoutTimer;
-
 const authInitialState = {
 	token: '',
 	isLogged: false,
-	isLogging: false,
-};
-
-const calculateRemainingTime = expirationTime => {
-	const currentDate = new Date().getTime();
-	const expirationDate = new Date(expirationTime).getTime();
-
-	const remainingTime = expirationDate - currentDate;
-
-	return remainingTime;
+	isLoading: false,
+	userData: {},
 };
 
 const authSlice = createSlice({
@@ -27,14 +17,8 @@ const authSlice = createSlice({
 			state.isLogged = true;
 			state.token = action.payload.token;
 
-			const remainingTime = calculateRemainingTime(
-				action.payload.expirationTime
-			);
-
 			localStorage.setItem('token', action.payload.token);
 			localStorage.setItem('expirationTime', action.payload.expirationTime);
-
-			logoutTimer = setTimeout(authActions.logout, remainingTime);
 		},
 		logout(state) {
 			state.isLogged = false;
@@ -42,13 +26,12 @@ const authSlice = createSlice({
 
 			localStorage.removeItem('token');
 			localStorage.removeItem('expirationTime');
-
-			if (logoutTimer) {
-				clearTimeout(logoutTimer);
-			}
 		},
-		setIsLogging(state, action) {
-			state.isLogging = action.payload;
+		setIsLoading(state, action) {
+			state.isLoading = action.payload;
+		},
+		setUserData(state, action) {
+			state.userData = action.payload;
 		},
 	},
 });
@@ -86,7 +69,8 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 		}
 
 		try {
-			dispatch(authActions.setIsLogging(true));
+			dispatch(authActions.setIsLoading(true));
+
 			const response = await fetch(url, {
 				method: 'POST',
 				body: JSON.stringify(sendBodyData),
@@ -94,9 +78,9 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 					'Content-Type': 'application/json',
 				},
 			});
-
 			const data = await response.json();
-			dispatch(authActions.setIsLogging(false));
+
+			dispatch(authActions.setIsLoading(false));
 
 			if (response.ok) {
 				if (formType === 'FIND') {
@@ -105,6 +89,8 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 						toastStyle
 					);
 					return;
+				} else {
+					toast.success(`Welcome, ${data.displayName}!`, toastStyle);
 				}
 
 				const expirationTime = new Date(
@@ -123,6 +109,60 @@ export const sendUserData = (email, password = '', username = '', formType) => {
 		} catch (e) {
 			toast.error(e.message, toastStyle);
 		}
+	};
+};
+
+export const setUserData = token => {
+	return async dispatch => {
+		try {
+			dispatch(authActions.setIsLoading(true));
+			const response = await fetch(
+				'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM',
+				{
+					method: 'POST',
+					body: JSON.stringify({
+						idToken: token,
+					}),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+
+			const responseData = await response.json();
+			dispatch(authActions.setUserData(responseData.users[0]));
+		} catch (e) {
+			toast.error('Loaded User Data failed', toastStyle);
+		}
+
+		dispatch(authActions.setIsLoading(false));
+	};
+};
+
+export const updateUserData = updateData => {
+	return async dispatch => {
+		try {
+			dispatch(authActions.setIsLoading(true));
+			const response = await fetch(
+				'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM',
+				{
+					method: 'POST',
+					body: JSON.stringify(updateData),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+
+			const responseData = await response.json();
+			dispatch(authActions.setUserData(responseData));
+
+			toast.success('Update User Data success', toastStyle);
+		} catch (e) {
+			toast.error('Update User Data failed', toastStyle);
+		}
+
+		dispatch(authActions.setIsLoading(false));
 	};
 };
 

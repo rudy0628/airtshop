@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
-import TicketCart from '../components/tickets/TicketCart';
+import TicketCart from '../components/ticketCart/TicketCart';
 
 const MyTicketPage = () => {
 	return (

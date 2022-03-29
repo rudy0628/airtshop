@@ -1,0 +1,89 @@
+.section-profile {
+	padding: 17.6rem 3.2rem 9.6rem;
+}
+
+.profile {
+	max-width: 60rem;
+	margin: 0 auto;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+
+	&__upload {
+		position: relative;
+		margin-bottom: 2rem;
+		& img {
+			width: 20rem;
+			height: 20rem;
+			border: 3px solid #d6336c;
+			border-radius: 50%;
+			display: block;
+			margin: 0 auto;
+			object-fit: cover;
+		}
+
+		& button {
+			position: absolute;
+			top: 75%;
+			left: 60%;
+			font-size: 3.2rem;
+			height: 5.2rem;
+			width: 5.2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: none;
+			border: none;
+			border-radius: 50%;
+			color: #fff;
+			background-color: #d6336c;
+			cursor: pointer;
+		}
+	}
+
+	&__name {
+		display: flex;
+		gap: 2.4rem;
+		align-items: center;
+		font-size: 2rem;
+
+		& span {
+			letter-spacing: 1.2px;
+		}
+	}
+
+	&__input input {
+		margin-bottom: 0;
+
+		&::placeholder {
+			color: #333;
+			opacity: 1;
+		}
+	}
+
+	&__email {
+		font-size: 2rem;
+
+		& span {
+			letter-spacing: 1.2px;
+		}
+	}
+
+	&__reset {
+		display: flex;
+		align-items: center;
+		font-size: 2rem;
+
+		& span {
+			letter-spacing: 1.2px;
+		}
+	}
+
+	&__btn {
+		border-radius: 150px;
+		margin: 0;
+		font-size: 1.6rem;
+		padding: 0.6rem 1.2rem;
+	}
+}

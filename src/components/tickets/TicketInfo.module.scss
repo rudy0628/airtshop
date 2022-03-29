@@ -1,0 +1,13 @@
+.ticketInfo {
+	border-top: 1px solid #d9d9d9;
+
+	&__title {
+		font-size: 2.4rem;
+		margin: 2.4rem 0;
+	}
+
+	&__btn {
+		display: block;
+		width: 100%;
+	}
+}

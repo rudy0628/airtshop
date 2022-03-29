@@ -24,15 +24,19 @@ const ticketsSlice = createSlice({
 	},
 });
 
-export const fetchTicketsData = () => {
+export const fetchTicketsData = (dep, arr) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
 		try {
 			// using third party api to get flight data
 			const flightResponse = await fetch(
-				`https://airlabs.co/api/v9/schedules?dep_iata=MIA&arr_iata=SFO&api_key=${process.env.REACT_APP_FLIGHT_API_KEY}`
+				`https://airlabs.co/api/v9/schedules?dep_iata=${dep}&arr_iata=${arr}&api_key=${process.env.REACT_APP_FLIGHT_API_KEY}`
 			);
+
+			if (!flightResponse.ok) {
+				throw new Error();
+			}
 
 			const responseData = await flightResponse.json();
 			const ticketsData = responseData.response;
@@ -60,6 +64,10 @@ export const getTicketCartData = token => {
 				}
 			);
 
+			if (!response.ok && response.status !== 404) {
+				throw new Error();
+			}
+
 			const responseData = await response.json();
 
 			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
@@ -77,14 +85,21 @@ export const sendTicketCartData = (ticket, token) => {
 		dispatch(ticketsActions.setIsLoading(true));
 
 		try {
-			await fetch(`${process.env.REACT_APP_BACKEND_URL}/user-tickets`, {
-				method: 'POST',
-				body: JSON.stringify(ticket),
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
+				{
+					method: 'POST',
+					body: JSON.stringify(ticket),
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error();
+			}
 
 			toast.success(`Add ticket to your cart!`, toastStyle);
 		} catch (e) {
@@ -113,6 +128,10 @@ export const deleteTicketCartData = (id, token) => {
 					},
 				}
 			);
+
+			if (!response.ok) {
+				throw new Error();
+			}
 
 			const responseData = await response.json();
 

@@ -13,14 +13,21 @@ import 'react-toastify/dist/ReactToastify.css';
 const MyTicketPage = React.lazy(() => import('./pages/MyTicketPage'));
 const SignInPage = React.lazy(() => import('./pages/SignInPage'));
 const TicketsPage = React.lazy(() => import('./pages/TicketsPage'));
+const MapPage = React.lazy(() => import('./pages/MapPage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+
+let logoutTimer;
+
+const calculateRemainingTime = expirationTime => {
+	const currentDate = new Date().getTime();
+	const expirationDate = new Date(expirationTime).getTime();
+	const remainingTime = expirationDate - currentDate;
+	return remainingTime;
+};
 
 function App() {
 	const dispatch = useDispatch();
-
-	// react-redux variables
 	const isLogged = useSelector(state => state.auth.isLogged);
-
-	// local storage variables
 	const token = localStorage.getItem('token');
 	const expirationTime = localStorage.getItem('expirationTime');
 
@@ -37,6 +44,16 @@ function App() {
 					token: token,
 				})
 			);
+
+			if (logoutTimer) {
+				clearTimeout(logoutTimer);
+			}
+
+			// set remaining time
+			const remainingTime = calculateRemainingTime(expirationTime);
+			logoutTimer = setTimeout(() => {
+				dispatch(authActions.logout(remainingTime));
+			}, remainingTime);
 		}
 	}, [token, expirationTime, dispatch]);
 
@@ -44,7 +61,7 @@ function App() {
 		<Fragment>
 			<Suspense
 				fallback={
-					<div className="centered">
+					<div className="overlay">
 						<Spinner />
 					</div>
 				}
@@ -54,6 +71,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<IntroducePage />} />
 					<Route path="/tickets" element={<TicketsPage />} />
+					<Route path="/flight-map" element={<MapPage />} />
 					<Route
 						path="/my-ticket"
 						element={isLogged ? <MyTicketPage /> : <Navigate to="/sign-in" />}
@@ -61,6 +79,10 @@ function App() {
 					<Route
 						path="/sign-in"
 						element={isLogged ? <Navigate to="/" /> : <SignInPage />}
+					/>
+					<Route
+						path="/profile"
+						element={isLogged ? <ProfilePage /> : <Navigate to="/sign-in" />}
 					/>
 				</Routes>
 			</Suspense>

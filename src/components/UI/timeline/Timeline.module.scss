@@ -1,0 +1,41 @@
+.step {
+	&__list {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: 70vw;
+		margin: 0 auto 6.4rem;
+		list-style: none;
+	}
+
+	&__item {
+		font-size: 2rem;
+		display: flex;
+		align-items: center;
+		&--number {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 5rem;
+			height: 5rem;
+			margin-right: 2rem;
+			border-radius: 50%;
+			border: 3px solid #d6336c;
+			color: #d6336c;
+			font-size: 2.4rem;
+		}
+
+		&--number-fill {
+			background-color: #d6336c;
+			color: #fff;
+		}
+	}
+
+	&__arrow {
+		font-size: 2.4rem;
+
+		&:last-child {
+			display: none;
+		}
+	}
+}

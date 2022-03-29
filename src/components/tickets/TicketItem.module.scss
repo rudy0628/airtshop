@@ -1,115 +1,136 @@
-.ticket {
-	max-width: 80%;
-	margin: 0 auto;
-	display: grid;
+.ticketItem {
+	max-width: 60rem;
+	margin: 2.4rem auto;
+	padding: 2.4rem;
 
-	&:not(:last-child) {
+	&__class {
+		display: inline-block;
+		background-color: #d9d9d9;
+		padding: 1rem 2rem;
+		margin-bottom: 2.4rem;
+		font-size: 1.6rem;
+		font-weight: 700;
+		letter-spacing: 1.5px;
+		border-radius: 150px;
+	}
+
+	&__price {
+		font-size: 4.2rem;
+		font-weight: 700;
 		margin-bottom: 2.4rem;
 	}
 
-	&__header {
-		padding: 1rem 2rem;
-		background-color: #fcc2d7;
-		font-size: 2rem;
-		text-transform: uppercase;
-		font-weight: 700;
-		border-top-left-radius: 11px;
-		border-top-right-radius: 11px;
-	}
-
 	&__main {
-		padding: 2rem;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		row-gap: 2rem;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		border: 1px solid #d9d9d9;
+		border-radius: 11px;
+		padding: 1.6rem;
+		margin-bottom: 2.4rem;
+
+		&--header {
+			display: flex;
+		}
 	}
 
-	&__flight,
-	&__arrTime,
-	&__depTime,
+	&__date {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 2.4rem;
+		color: #a9a9a9;
+		margin-right: 1.6rem;
+
+		& span {
+			display: block;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__airline {
+		width: 5.2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 1.6rem;
+
+		& img {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	&__info {
+		flex-grow: 2;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__duration {
+		flex-grow: 2;
+		margin: 0 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&--duration {
+			font-size: 1.6rem;
+			letter-spacing: 1.5px;
+			font-weight: 700;
+			color: #a9a9a9;
+		}
+
+		&--type {
+			font-size: 1.6rem;
+			font-weight: 700;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: #d6336c;
+		}
+
+		&--line {
+			height: 2px;
+			width: 100%;
+			background-color: #d9d9d9;
+			margin: 1rem 0;
+		}
+	}
+
 	&__from,
 	&__to {
 		display: flex;
-		align-items: center;
-		font-size: 2.4rem;
-		font-weight: 700;
-
-		@media only screen and (max-width: 31.25em) {
-			flex-direction: column;
-			align-items: flex-start;
-		}
+		flex-direction: column;
+		justify-content: center;
+		font-size: 2rem;
+		color: #a9a9a9;
 
 		& span {
-			font-size: 1.6rem;
-			margin-right: 1.2rem;
-			font-weight: 400;
-
-			@media only screen and (max-width: 31.25em) {
-				margin-right: 0rem;
-				margin-bottom: 1.2rem;
-			}
-		}
-	}
-
-	&__gate {
-		display: flex;
-		align-items: center;
-		font-size: 3.2rem;
-		font-weight: 700;
-		color: #d6336c;
-
-		@media only screen and (max-width: 31.25em) {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		& span {
-			font-size: 1.6rem;
-			margin-right: 1.2rem;
-			font-weight: 400;
+			display: block;
+			margin-bottom: 1rem;
+			font-weight: 700;
 			color: #333;
-
-			@media only screen and (max-width: 31.25em) {
-				margin-right: 0rem;
-				margin-bottom: 1.2rem;
-			}
 		}
 	}
 
-	&__footer {
-		padding: 1rem 2rem;
-		border-top: 2px solid #eee;
-		display: flex;
-		justify-content: space-between;
+	&__from {
+		align-items: flex-start;
+	}
 
-		@media only screen and (max-width: 37.5em) {
-			flex-direction: column;
-			gap: 2.4rem;
-		}
+	&__to {
+		align-items: flex-end;
 	}
 
 	&__btn {
-		&--order {
-			padding: 1rem 2rem;
-			border: 3px solid #f06595;
-			border-radius: 11px;
-			font-size: 2rem;
-			background-color: #f06595;
-			color: #fff;
-			cursor: pointer;
-			transition: all 0.3s;
-			box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
-
-			&:hover {
-				background-color: #fff;
-				color: #f06595;
-			}
-		}
+		display: block;
+		width: 100%;
 	}
 
 	&__text {
-		font-size: 1.6rem;
-		color: #f06595;
-		margin: 0 auto;
+		font-size: 2rem;
+		text-align: center;
+		color: #d6336c;
 	}
 }

@@ -1,11 +1,9 @@
 import Input from '../../UI/input/Input';
 import Card from '../../UI/card/Card';
+import { isNotEmpty, isEmail } from '../../../config/validator';
 
 import useInput from '../../../hooks/use-input';
 import classes from './ContactForm.module.scss';
-
-const isNotEmpty = value => value.trim().length !== 0;
-const isEmail = value => value.trim().length !== 0 && value.includes('@');
 
 const ContactForm = () => {
 	const {

@@ -11,6 +11,7 @@ import { auth } from '../../Firebase/firebase';
 import { authActions, sendUserData } from '../../store/auth-slice';
 import { toastStyle } from '../../config/content';
 import { toast } from 'react-toastify';
+import { isEmail, isPassword, isNotEmpty } from '../../config/validator';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
@@ -19,12 +20,8 @@ import Card from '../UI/card/Card';
 import Spinner from '../UI/spinner/Spinner';
 import classes from './SignInForm.module.scss';
 
-const isEmail = value => value.trim().length > 0 && value.includes('@');
-const isPassword = value => value.trim().length > 7 && value.trim().length < 17;
-const isNotEmpty = value => value.trim().length > 0;
-
 const SignInForm = () => {
-	const isLogging = useSelector(state => state.auth.isLogging);
+	const isLoading = useSelector(state => state.auth.isLoading);
 	const [formType, setFormType] = useState('SIGNIN');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -64,7 +61,9 @@ const SignInForm = () => {
 				dispatch(
 					authActions.login({
 						token: result._tokenResponse.idToken,
-						expirationTime: result.user.stsTokenManager.expirationTime,
+						expirationTime: new Date(
+							result.user.stsTokenManager.expirationTime
+						).toISOString(),
 					})
 				);
 				navigate('/');
@@ -84,7 +83,9 @@ const SignInForm = () => {
 				dispatch(
 					authActions.login({
 						token: result._tokenResponse.idToken,
-						expirationTime: result.user.stsTokenManager.expirationTime,
+						expirationTime: new Date(
+							result.user.stsTokenManager.expirationTime
+						).toISOString(),
 					})
 				);
 				navigate('/');
@@ -134,10 +135,6 @@ const SignInForm = () => {
 		dispatch(sendUserData(emailValue, passwordValue, nameValue, formType));
 
 		reset();
-
-		if (formType !== 'FIND') {
-			toast.success(`Welcome, ${nameValue}!`, toastStyle);
-		}
 	};
 
 	let title, formBtnText;
@@ -154,8 +151,8 @@ const SignInForm = () => {
 
 	return (
 		<Card className={classes.signIn}>
-			{isLogging && <div className="centered">{<Spinner />}</div>}
-			{!isLogging && (
+			{isLoading && <div className="centered">{<Spinner />}</div>}
+			{!isLoading && (
 				<Fragment>
 					<form onSubmit={submitHandler}>
 						<h2 className="heading__secondary">{title}</h2>

@@ -1,0 +1,28 @@
+.tickets {
+	&__search-form {
+		max-width: 70rem;
+		margin: 0 auto;
+		padding: 2.4rem;
+
+		& form {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2.4rem;
+
+			& p {
+				font-size: 1.6rem;
+				grid-column: 1 / -1;
+			}
+
+			& a:link,
+			& a:visited {
+				color: #d6336c;
+			}
+		}
+	}
+
+	&__full-row {
+		width: 100%;
+		grid-column: 1 / -1;
+	}
+}

@@ -132,7 +132,7 @@ body {
 
 // error text
 .error-text {
-	margin-bottom: 1.2rem;
+	margin: 1.2rem 0;
 	font-size: 1.6rem;
 	text-align: center;
 	color: #f03e3e;
@@ -143,6 +143,18 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.overlay {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(255, 255, 255);
 }
 
 // line break
