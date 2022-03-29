@@ -117,7 +117,7 @@ export const setUserData = token => {
 		try {
 			dispatch(authActions.setIsLoading(true));
 			const response = await fetch(
-				'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM',
+				`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_FIREBASE_API_KEY}`,
 				{
 					method: 'POST',
 					body: JSON.stringify({
@@ -144,7 +144,7 @@ export const updateUserData = updateData => {
 		try {
 			dispatch(authActions.setIsLoading(true));
 			const response = await fetch(
-				'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAJDhxbyIDjxD0RybAuhDrqqHiEuqVYQkM',
+				`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_FIREBASE_API_KEY}`,
 				{
 					method: 'POST',
 					body: JSON.stringify(updateData),

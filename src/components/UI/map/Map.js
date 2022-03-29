@@ -25,7 +25,7 @@ const Map = () => {
 	useEffect(() => {
 		const fetchFlightData = async () => {
 			const response = await fetch(
-				'https://airlabs.co/api/v9/flights?api_key=35c8ad7e-50c5-4675-a324-c1fcb0666b17'
+				`https://airlabs.co/api/v9/flights?api_key=${process.env.REACT_APP_FLIGHT_API_KEY}`
 			);
 
 			const responseData = await response.json();
@@ -42,7 +42,9 @@ const Map = () => {
 	return (
 		<div style={{ height: '100vh', width: '100%' }}>
 			<GoogleMapReact
-				bootstrapURLKeys={{ key: 'AIzaSyBSsCXLI8SkQwP_J8XBhRotkd9O_mUL76E' }}
+				bootstrapURLKeys={{
+					key: `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`,
+				}}
 				center={{
 					lat: lat || 0,
 					lng: lng || 0,

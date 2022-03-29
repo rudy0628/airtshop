@@ -66,10 +66,13 @@ const Profile = () => {
 
 			const formData = new FormData();
 			formData.append('file', e.target.files[0]);
-			formData.append('upload_preset', 'jo8lxhci');
+			formData.append(
+				'upload_preset',
+				`${process.env.REACT_APP_CLOUDINARY_PRESET_NAME}`
+			);
 
 			const response = await fetch(
-				'https://api.cloudinary.com/v1_1/dz50afcaa/image/upload',
+				`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
 				{
 					method: 'POST',
 					body: formData,
