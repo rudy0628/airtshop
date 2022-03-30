@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { toastStyle } from '../../config/content';
 import defaultHeadshot from '../../img/default-headshot.jpeg';
 
+import { BsPencilSquare, BsCheck2 } from 'react-icons/bs';
 import Spinner from '../UI/spinner/Spinner';
 import Input from '../UI/input/Input';
 import Card from '../UI/card/Card';
@@ -150,17 +151,17 @@ const Profile = () => {
 							{!isInChangeName && isNotGoogleAccount && (
 								<button
 									onClick={isInChangeNameHandler}
-									className={`btn btn--form ${classes['profile__btn']}`}
+									className={`btn btn--form ${classes['profile__btn--circle']}`}
 								>
-									Chagne Name
+									<BsPencilSquare className={classes['profile__icon']} />
 								</button>
 							)}
 							{isInChangeName && isNotGoogleAccount && (
 								<button
 									onClick={changeNameHandler}
-									className={`btn btn--form ${classes['profile__btn']}`}
+									className={`btn btn--form ${classes['profile__btn--circle']}`}
 								>
-									Save
+									<BsCheck2 className={classes['profile__icon']} />
 								</button>
 							)}
 						</div>

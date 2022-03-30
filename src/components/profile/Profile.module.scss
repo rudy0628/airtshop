@@ -85,5 +85,19 @@
 		margin: 0;
 		font-size: 1.6rem;
 		padding: 0.6rem 1.2rem;
+
+		&--circle {
+			border-radius: 50%;
+			margin: 0;
+			padding: 0.8rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	&__icon {
+		height: 2.4rem;
+		width: 2.4rem;
 	}
 }

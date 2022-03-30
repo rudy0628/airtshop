@@ -43,7 +43,7 @@ const Tickets = () => {
 		<section className={classes['section-tickets']}>
 			<TimeLine
 				currentStep={currentStep}
-				step={['Search ticket', 'Choose ticket', 'Check ticket']}
+				step={['Search', 'Choose', 'Check']}
 			/>
 			{currentStep === 1 && (
 				<TicketSearch

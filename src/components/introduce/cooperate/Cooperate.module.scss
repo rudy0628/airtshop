@@ -1,3 +1,15 @@
+$animationSpeed: 28.5s;
+
+// Animation
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(calc(-250px * 5));
+	}
+}
+
 .section-cooperate {
 	padding: 9.6rem 0;
 	background-color: #eee;
@@ -14,23 +26,51 @@
 		}
 	}
 
-	&__img-box {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
-		padding: 0 3.2rem;
+	&__slider {
+		background: #eee;
+		height: 10rem;
+		margin: auto;
+		overflow: hidden;
+		position: relative;
+		max-width: 120rem;
 
-		& img {
-			height: 8rem;
-			margin-bottom: 1.2rem;
+		&::before,
+		&::after {
+			content: '';
+			height: 10rem;
+			position: absolute;
+			width: 20rem;
+			z-index: 2;
+		}
 
-			&:not(:last-child) {
-				margin-right: 3.6rem;
+		&::after {
+			right: 0;
+			top: 0;
+			transform: rotateZ(180deg);
+		}
 
-				@media only screen and (max-width: 28.125em) {
-					margin-right: 0;
-				}
+		&::before {
+			left: 0;
+			top: 0;
+		}
+
+		&--track {
+			animation: scroll $animationSpeed linear infinite;
+			display: flex;
+			align-items: center;
+			width: calc(25rem * 10);
+		}
+
+		&--slide {
+			height: 10rem;
+			width: 25rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			& img {
+				padding: 0 2rem;
+				width: 100%;
 			}
 		}
 	}

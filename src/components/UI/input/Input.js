@@ -1,3 +1,4 @@
+import { BiErrorCircle } from 'react-icons/bi';
 import classes from './Input.module.scss';
 
 const Input = props => {
@@ -16,7 +17,10 @@ const Input = props => {
 				disabled={props.disabled}
 			/>
 			{props.error.hasError && (
-				<p className="error-text">{props.error.errorMessage}</p>
+				<p className="error-text">
+					<BiErrorCircle className="error-text__icon" />
+					{props.error.errorMessage}
+				</p>
 			)}
 		</div>
 	);

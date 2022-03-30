@@ -72,6 +72,10 @@
 		background: none;
 		cursor: pointer;
 
+		@media only screen and (max-width: 37.5em) {
+			font-size: 2.8rem;
+		}
+
 		&:link,
 		&:visited {
 			font-size: 2rem;
@@ -79,6 +83,10 @@
 			font-weight: 700;
 			transition: all 0.3s;
 			color: #555;
+
+			@media only screen and (max-width: 37.5em) {
+				font-size: 2.8rem;
+			}
 		}
 
 		&:hover,
@@ -94,6 +102,10 @@
 				font-weight: 700;
 				transition: all 0.3s;
 				color: #f06595;
+
+				@media only screen and (max-width: 37.5em) {
+					font-size: 2.8rem;
+				}
 			}
 
 			&:hover,

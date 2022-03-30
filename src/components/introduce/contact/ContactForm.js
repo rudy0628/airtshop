@@ -2,6 +2,7 @@ import Input from '../../UI/input/Input';
 import Card from '../../UI/card/Card';
 import { isNotEmpty, isEmail } from '../../../config/validator';
 
+import { BiErrorCircle } from 'react-icons/bi';
 import useInput from '../../../hooks/use-input';
 import classes from './ContactForm.module.scss';
 
@@ -68,7 +69,10 @@ const ContactForm = () => {
 						onBlur={messageBlurHandler}
 					/>
 					{messageHasError && (
-						<p className="error-text">InValid Message Input</p>
+						<p className="error-text">
+							<BiErrorCircle className="error-text__icon" />
+							InValid Message Input
+						</p>
 					)}
 				</div>
 				<button className="btn btn--form">Submit</button>
