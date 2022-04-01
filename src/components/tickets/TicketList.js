@@ -15,16 +15,16 @@ const TicketList = props => {
 
 	let sortingTickets;
 	if (sortByAsc) {
-		sortingTickets = ticketsContent
+		sortingTickets = infiniteTickets
 			.slice(0)
-			.sort((a, b) => a.duration - b.duration);
+			.sort((a, b) => a.props.duration - b.props.duration);
 	} else {
-		sortingTickets = ticketsContent
+		sortingTickets = infiniteTickets
 			.slice(0)
-			.sort((a, b) => b.duration - a.duration);
+			.sort((a, b) => b.props.duration - a.props.duration);
 	}
 
-	const filterTickets = sortingTickets
+	const filterTickets = ticketsContent
 		.filter(
 			ticket =>
 				ticket.dep_time_ts * 1000 > Date.now() &&
@@ -98,7 +98,7 @@ const TicketList = props => {
 							</div>
 						}
 					>
-						{infiniteTickets}
+						{sortingTickets}
 					</InfiniteScroll>
 				</ul>
 			)}
