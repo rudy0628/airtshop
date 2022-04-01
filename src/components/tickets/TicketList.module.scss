@@ -1,6 +1,10 @@
 .ticketList {
 	list-style: none;
 
+	& div div {
+		overflow: hidden !important;
+	}
+
 	&__btn--sort {
 		border: none;
 		background: none;

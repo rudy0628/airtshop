@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import ssairlineLogo from '../../img/ssairline-logo.png';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
+import Spinner from '../UI/spinner/Spinner';
 import TicketItem from './TicketItem';
 import classes from './TicketList.module.scss';
 
 const TicketList = props => {
+	const [infiniteTickets, setInfiniteTickets] = useState([]);
 	const [sortByAsc, setSortByAsc] = useState(true);
 	let ticketsContent = useSelector(state => state.tickets.tickets);
 
@@ -55,13 +58,25 @@ const TicketList = props => {
 		setSortByAsc(prevState => !prevState);
 	};
 
+	// infinite load
+	useEffect(() => {
+		setInfiniteTickets(filterTickets);
+	}, []);
+
+	const fetchMoreData = () => {
+		setTimeout(() => {
+			setInfiniteTickets(prevTickets => prevTickets.concat(filterTickets));
+		}, 1500);
+	};
+
 	return (
 		<React.Fragment>
-			{filterTickets && filterTickets.length !== 0 && (
+			{infiniteTickets && infiniteTickets.length !== 0 && (
 				<div className={classes['ticketList__header']}>
 					<p className={classes['ticketList__title']}>
-						{ticketsContent.length} ticket{ticketsContent.length < 1 ? '' : 's'}{' '}
-						from <img src={ssairlineLogo} alt="ss airline" /> SS Airline
+						{infiniteTickets.length} ticket
+						{infiniteTickets.length < 1 ? '' : 's'} from{' '}
+						<img src={ssairlineLogo} alt="ss airline" /> SS Airline
 					</p>
 					<button
 						onClick={sortByHandler}
@@ -71,10 +86,23 @@ const TicketList = props => {
 					</button>
 				</div>
 			)}
-			{filterTickets && filterTickets.length !== 0 && (
-				<ul className={classes['ticketList']}>{filterTickets}</ul>
+			{infiniteTickets && infiniteTickets.length !== 0 && (
+				<ul className={classes['ticketList']}>
+					<InfiniteScroll
+						dataLength={infiniteTickets.length}
+						next={fetchMoreData}
+						hasMore={true}
+						loader={
+							<div className="centered">
+								<Spinner />
+							</div>
+						}
+					>
+						{infiniteTickets}
+					</InfiniteScroll>
+				</ul>
 			)}
-			{filterTickets.length === 0 && (
+			{infiniteTickets.length === 0 && (
 				<div className={classes['ticketList__notFound']}>
 					<p className={classes['ticketList__emptyText']}>No tickets found!</p>
 					<button onClick={searchAgainHandler} className="btn btn--form">
