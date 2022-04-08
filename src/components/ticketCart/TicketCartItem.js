@@ -28,7 +28,7 @@ const TicketCartItem = props => {
 					method: 'POST',
 					body: JSON.stringify({
 						id: ticket.payment,
-						amount: price,
+						amount: price * 100,
 					}),
 					headers: {
 						'Content-Type': 'application/json',
