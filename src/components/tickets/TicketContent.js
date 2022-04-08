@@ -1,4 +1,5 @@
 import React from 'react';
+import { productPrice } from '../../config/helper';
 
 import ssairlineLogo from '../../img/ssairline-logo.png';
 import classes from './TicketItem.module.scss';
@@ -11,15 +12,7 @@ const TicketContent = props => {
 	const arrDate = new Date(ticket.arrTime * 1000);
 
 	const classType = ticket.class ? ticket.class : ticket.classType;
-
-	let price;
-	if (classType === 'economy') {
-		price = ticket.duration * 52;
-	} else if (classType === 'business') {
-		price = ticket.duration * 52 * 2;
-	} else if (classType === 'first') {
-		price = ticket.duration * 52 * 5;
-	}
+	const price = productPrice(ticket.duration, classType);
 
 	return (
 		<React.Fragment>

@@ -70,6 +70,7 @@ const TicketInfo = props => {
 					fullName: fullNameValue,
 					email: emailValue,
 					phoneNumber: phoneNumberValue,
+					payment: 'none',
 				},
 				token
 			)

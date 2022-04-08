@@ -204,3 +204,13 @@ body {
 	text-align: center;
 	font-size: 3.2rem;
 }
+
+// stripe form
+.StripeElement--webkit-autofill {
+	background: transparent !important;
+}
+
+.StripeElement {
+	width: 100%;
+	padding: 2rem 2rem;
+}

@@ -110,6 +110,42 @@ export const sendTicketCartData = (ticket, token) => {
 	};
 };
 
+export const updateTicketCartData = (id, payment, token) => {
+	return async dispatch => {
+		dispatch(ticketsActions.setIsLoading(true));
+
+		try {
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
+				{
+					method: 'PATCH',
+					body: JSON.stringify({
+						ticketId: id,
+						payment: payment,
+					}),
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error();
+			}
+
+			const responseData = await response.json();
+
+			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
+			toast.success(`Updated ticket from your cart!`, toastStyle);
+		} catch (e) {
+			toast.error(`Updated ticket from your cart failed!`, toastStyle);
+		}
+
+		dispatch(ticketsActions.setIsLoading(false));
+	};
+};
+
 export const deleteTicketCartData = (id, token) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
@@ -138,7 +174,7 @@ export const deleteTicketCartData = (id, token) => {
 			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
 			toast.success(`Delete ticket from your cart!`, toastStyle);
 		} catch (e) {
-			toast.success(`Delete ticket from your cart failed!`, toastStyle);
+			toast.error(`Delete ticket from your cart failed!`, toastStyle);
 		}
 
 		dispatch(ticketsActions.setIsLoading(false));
