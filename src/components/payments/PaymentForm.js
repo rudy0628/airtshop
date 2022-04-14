@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { toastStyle } from '../../config/content';
 import { updateTicketCartData } from '../../store/tickets-slice';
 import { productPrice } from '../../config/helper';
+import sendHttp from '../../config/send-http';
 
 import Spinner from '../UI/spinner/Spinner';
 import classes from './PaymentForm.module.scss';
@@ -57,24 +58,29 @@ const PaymentForm = props => {
 		if (!error) {
 			try {
 				const { id } = paymentMethod;
-				const response = await fetch(process.env.REACT_APP_BACKEND_STRIPE_URL, {
-					method: 'POST',
-					body: JSON.stringify({
-						amount: price * 100,
-						id,
-						userId: ticket._id,
-						flight: ticket.flight,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				const requestBody = {
+					query: `
+						mutation {
+							createPayment(paymentId: "${id}", amount: ${price * 100}, flight: "${
+						ticket.flight
+					}") {
+								id
+								success
+							}
+						}
+					`,
+				};
 
-				const responseData = await response.json();
+				const responseData = await sendHttp(requestBody, token);
 
-				if (responseData.success) {
-					dispatch(updateTicketCartData(ticket._id, responseData.id, token));
+				if (responseData.data.createPayment.success) {
+					dispatch(
+						updateTicketCartData(
+							ticket._id,
+							responseData.data.createPayment.id,
+							token
+						)
+					);
 					toast.success('Payment successful', toastStyle);
 					cancelHandler();
 				}

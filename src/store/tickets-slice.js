@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { toastStyle } from '../config/content';
+import sendHttp from '../config/send-http';
 
 const ticketsInitialState = {
 	tickets: [],
@@ -52,25 +53,35 @@ export const fetchTicketsData = (dep, arr) => {
 export const getTicketCartData = token => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
+		const requestBody = {
+			query: `
+				query {
+					tickets {
+						_id
+						flight
+						depTime
+						arrTime
+						from
+						to
+						gate
+						duration
+						classType
+						passenger
+						seat
+						fullName
+						email
+						phoneNumber
+						payment
+					}
+				}
+			`,
+		};
 
 		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
-				{
-					method: 'GET',
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+			const responseData = await sendHttp(requestBody, token);
+			if (responseData.error) throw new Error();
 
-			if (!response.ok && response.status !== 404) {
-				throw new Error();
-			}
-
-			const responseData = await response.json();
-
-			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
+			dispatch(ticketsActions.replaceTicketCart(responseData.data.tickets));
 		} catch (e) {
 			toast.error('Fetch your ticket cart failed!', toastStyle);
 		}
@@ -84,22 +95,18 @@ export const sendTicketCartData = (ticket, token) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
-		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
-				{
-					method: 'POST',
-					body: JSON.stringify(ticket),
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
+		const requestBody = {
+			query: `
+				mutation addTicket($flight: String!, $depTime: String!, $arrTime: String!, $from: String!, $to: String!, $gate: String!, $duration: Float!, $classType: String!, $passenger: String!, $seat: String!, $fullName: String!, $email: String!, $phoneNumber: String!, $payment: String!) {
+					addTicket(ticketInput: { flight: $flight, depTime: $depTime, arrTime: $arrTime, from: $from, to: $to, gate: $gate, duration: $duration, classType: $classType, passenger: $passenger, seat: $seat, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, payment: $payment })
 				}
-			);
+			`,
+			variables: ticket,
+		};
 
-			if (!response.ok) {
-				throw new Error();
-			}
+		try {
+			const responseData = await sendHttp(requestBody, token);
+			if (responseData.error) throw new Error();
 
 			toast.success(`Add ticket to your cart!`, toastStyle);
 		} catch (e) {
@@ -114,29 +121,37 @@ export const updateTicketCartData = (id, payment, token) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
-		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
-				{
-					method: 'PATCH',
-					body: JSON.stringify({
-						ticketId: id,
-						payment: payment,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
+		const requestBody = {
+			query: `
+				mutation {
+					updateTicket(ticketId: "${id}", payment: "${payment}") {
+						_id
+						flight
+						depTime
+						arrTime
+						from
+						to
+						gate
+						duration
+						classType
+						passenger
+						seat
+						fullName
+						email
+						phoneNumber
+						payment
+					}
 				}
+			`,
+		};
+
+		try {
+			const responseData = await sendHttp(requestBody, token);
+			if (responseData.error) throw new Error();
+
+			dispatch(
+				ticketsActions.replaceTicketCart(responseData.data.updateTicket)
 			);
-
-			if (!response.ok) {
-				throw new Error();
-			}
-
-			const responseData = await response.json();
-
-			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
 			toast.success(`Updated ticket from your cart!`, toastStyle);
 		} catch (e) {
 			toast.error(`Updated ticket from your cart failed!`, toastStyle);
@@ -150,28 +165,37 @@ export const deleteTicketCartData = (id, token) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
-		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_URL}/user-tickets`,
-				{
-					method: 'DELETE',
-					body: JSON.stringify({
-						ticketId: id,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
+		const requestBody = {
+			query: `
+				mutation {
+					deleteTicket(ticketId: "${id}") {
+						_id
+						flight
+						depTime
+						arrTime
+						from
+						to
+						gate
+						duration
+						classType
+						passenger
+						seat
+						fullName
+						email
+						phoneNumber
+						payment
+					}
 				}
+			`,
+		};
+
+		try {
+			const responseData = await sendHttp(requestBody, token);
+			if (responseData.error) throw new Error();
+
+			dispatch(
+				ticketsActions.replaceTicketCart(responseData.data.deleteTicket)
 			);
-
-			if (!response.ok) {
-				throw new Error();
-			}
-
-			const responseData = await response.json();
-
-			dispatch(ticketsActions.replaceTicketCart(responseData.existingUserCart));
 			toast.success(`Delete ticket from your cart!`, toastStyle);
 		} catch (e) {
 			toast.error(`Delete ticket from your cart failed!`, toastStyle);

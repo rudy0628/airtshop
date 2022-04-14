@@ -4,6 +4,7 @@ import { deleteTicketCartData } from '../../store/tickets-slice';
 import { productPrice } from '../../config/helper';
 import { toast } from 'react-toastify';
 import { toastStyle } from '../../config/content';
+import sendHttp from '../../config/send-http';
 
 import StripeContainer from '../payments/StripeContainer';
 import TicketContent from '../tickets/TicketContent';
@@ -22,26 +23,23 @@ const TicketCartItem = props => {
 		dispatch(deleteTicketCartData(ticket._id, token));
 
 		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_STRIPE_URL}/refund`,
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						id: ticket.payment,
-						amount: price * 100,
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+			const requestBody = {
+				query: `
+					mutation {
+						refundPayment(paymentIntentId: "${ticket.payment}", amount: ${price * 100}) {
+							message
+							success
+						}
+					}
+				`,
+			};
 
-			const responseData = await response.json();
+			const responseData = await sendHttp(requestBody, token);
 
-			if (responseData.success) toast.success('Refund successful', toastStyle);
+			if (responseData.data.refundPayment.success)
+				toast.success('Refund successful', toastStyle);
 
-			if (!response.ok) throw new Error();
+			if (responseData.error) throw new Error();
 		} catch (e) {
 			toast.error('Refund failed', toastStyle);
 		}
