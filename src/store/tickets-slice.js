@@ -110,7 +110,7 @@ export const sendTicketCartData = (ticket, token) => {
 	};
 };
 
-export const updateTicketCartData = (id, payment, token) => {
+export const updateTicketCartData = (id, payment, duration, token) => {
 	return async dispatch => {
 		dispatch(ticketsActions.setIsLoading(true));
 
@@ -122,6 +122,7 @@ export const updateTicketCartData = (id, payment, token) => {
 					body: JSON.stringify({
 						ticketId: id,
 						payment: payment,
+						duration: duration,
 					}),
 					headers: {
 						'Content-Type': 'application/json',

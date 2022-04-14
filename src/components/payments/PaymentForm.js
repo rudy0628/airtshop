@@ -74,7 +74,14 @@ const PaymentForm = props => {
 				const responseData = await response.json();
 
 				if (responseData.success) {
-					dispatch(updateTicketCartData(ticket._id, responseData.id, token));
+					dispatch(
+						updateTicketCartData(
+							ticket._id,
+							responseData.id,
+							ticket.duration,
+							token
+						)
+					);
 					toast.success('Payment successful', toastStyle);
 					cancelHandler();
 				}

@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { toastStyle } from '../../config/content';
 import defaultHeadshot from '../../img/default-headshot.jpeg';
 
+import Chart from '../UI/chart.js/Chart';
 import { BsPencilSquare, BsCheck2 } from 'react-icons/bs';
 import Spinner from '../UI/spinner/Spinner';
 import Input from '../UI/input/Input';
@@ -181,6 +182,12 @@ const Profile = () => {
 							</p>
 						)}
 					</React.Fragment>
+				)}
+				{!isLoading && (
+					<div className={classes['profile__chart']}>
+						<h2>Milage total</h2>
+						<Chart />
+					</div>
 				)}
 			</Card>
 		</section>
