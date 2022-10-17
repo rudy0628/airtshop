@@ -1,5 +1,5 @@
 # Airtshop
-## Airtshop 是目前所在進行的Side project，是一款可以訂購機票的網站
+## Airtshop 是一款可以訂購機票的網站
 ◆ 前端由 React 開發，搭配後端 Node.js 及 MongoDB 撰寫 RESTful API 實現網站功能。  
 ◆ 使用者可以新增、刪除、搜尋、瀏覽機票，串接第三方 API 來獲取瀏覽機票中的所有機票。  
 ◆ 使用者可在購物車當中，使用信用卡進行付款動作，付款功能是使用第三方 API stripe 來實現。  
